@@ -9,9 +9,9 @@ if (!isset($_GET["user_id"])) {
     exit;
 }
 
-$user_id = (int)$_GET["user_id"];
+$userId = (int)$_GET["user_id"];
 $orderController = new OrderController();
-$orders = $orderController->getOrdersByUserId($user_id);
+$orders = $orderController->getOrdersByUserId($userId);
 ?>
 
 <!DOCTYPE html>
