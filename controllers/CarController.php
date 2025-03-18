@@ -26,4 +26,17 @@ class CarController extends DatabaseHandler
         return $cars;
     }
 
+    public function getCar(int $id): ?Car
+    {
+        $sql = "SELECT * FROM cars WHERE id = $id";
+        $stmt = $this->connection->query($sql);
+        if ($stmt->num_rows > 0) {
+            $row = $stmt->fetch_assoc();
+            $car = new Car($row["id"], $row["number"], $row["release_year"], $row["baby_seat"]);
+            $stmt->close();
+            return $car;
+        }
+        $stmt->close();
+        return null;
+    }
 }
