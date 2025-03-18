@@ -16,43 +16,15 @@ class Car {
         $this->babySeat = $babySeat;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
+    public function getId() { return $this->id; }
+    public function setId($id): void { $this->id = $id; }
 
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
+    public function getNumber() { return $this->number; }
+    public function setNumber($number): void { $this->number = $number; }
 
-    public function getNumber()
-    {
-        return $this->number;
-    }
+    public function getReleaseYear() { return $this->releaseYear; }
+    public function setReleaseYear($releaseYear): void { $this->releaseYear = $releaseYear; }
 
-    public function setNumber($number): void
-    {
-        $this->number = $number;
-    }
-
-    public function getReleaseYear()
-    {
-        return $this->releaseYear;
-    }
-
-    public function setReleaseYear($releaseYear): void
-    {
-        $this->releaseYear = $releaseYear;
-    }
-
-    public function hasBabySeat()
-    {
-        return $this->babySeat;
-    }
-
-    public function setBabySeat($babySeat): void
-    {
-        $this->babySeat = $babySeat;
-    }
+    public function hasBabySeat() { return $this->babySeat; }
+    public function setBabySeat($babySeat): void { $this->babySeat = $babySeat; }
 }
