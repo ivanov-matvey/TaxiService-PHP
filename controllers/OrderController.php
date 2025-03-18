@@ -78,6 +78,30 @@ class OrderController extends DatabaseHandler
         $stmt->close();
     }
 
+    public function editOrder(Order $order): void
+    {
+        $sql = "UPDATE orders SET price=?, order_datetime=?, baby=?, car_id=?, driver_id=?, client_id=? WHERE id=?";
+        $stmt = $this->connection->prepare($sql);
+        $orderId = $order->getId();
+        $price = $order->getPrice();
+        $datetime = $order->getOrderDatetime();
+        $baby = $order->isBaby();
+        $carId = $order->getCarId();
+        $driverId = $order->getDriverId();
+        $clientId = $order->getClientId();
+        $stmt->bind_param(
+            "dsiiiii",
+            $price,
+            $datetime,
+            $baby,
+            $carId,
+            $driverId,
+            $clientId,
+            $orderId
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
 
     private function fetchOrders(string $column, int $id): array
     {
