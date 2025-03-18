@@ -57,19 +57,19 @@ $carReleaseYear = $car->getReleaseYear();
     </ul>
 </header>
 
-<h2 class="text-center text-primary mt-4 mb-4">Контент заказа</h2>
+    <h2 class="text-center text-primary mt-4 mb-4">Контент заказа</h2>
 
-<div class="container" style="max-width:900px">
-    <h5 class="text-center">Стоимость: <?= $orderPrice ?></h5>
-    <h5 class="text-center">Дата и время: <?= $orderDatetime ?></h5>
-    <h5 class="text-center">Детское кресло: <?= $orderIsBaby ?></h5>
-    <?php if($client): ?>
-        <h5 class="text-center">Водитель: <?= $driverPhone ?></h5>
-    <?php else: ?>
-        <h5 class="text-center">Клиент: <?= $clientPhone ?></h5>
-    <?php endif;?>
-    <h5 class="text-center"><?= $carNumber ?> (<?= $carReleaseYear ?>)</h5>
-</div>
+    <div class="container" style="max-width:900px">
+        <h5 class="text-center">Стоимость: <?= $orderPrice ?>₽</h5>
+        <?php if($client): ?>
+            <h5 class="text-center">Водитель: <?= $driverPhone ?></h5>
+        <?php else: ?>
+            <h5 class="text-center">Клиент: <?= $clientPhone ?></h5>
+        <?php endif;?>
+        <h5 class="text-center">Автомобиль: <?= $carNumber ?> (<?= $carReleaseYear ?>)</h5>
+        <h5 class="text-center">Дата и время: <?= $orderDatetime ?></h5>
+        <h5 class="text-center">Детское кресло: <?= $orderIsBaby ?></h5>
+    </div>
 
 </body>
 

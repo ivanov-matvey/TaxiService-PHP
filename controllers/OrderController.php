@@ -103,6 +103,12 @@ class OrderController extends DatabaseHandler
         $stmt->close();
     }
 
+    public function deleteOrder(int $id): void
+    {
+        $sql = "DELETE FROM orders WHERE id = $id";
+        $this->connection->query($sql);
+    }
+
     private function fetchOrders(string $column, int $id): array
     {
         $sql = "SELECT * FROM orders WHERE $column = $id";
