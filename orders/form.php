@@ -35,11 +35,10 @@ $user = null;
 if ($orderId) {
     if ($client) {
         $userId = $client->getUserId();
-        $order = $orderController->getOrder($orderId);
     } else {
         $userId = $driver->getUserId();
-        $order = $orderController->getOrder($orderId);
     }
+    $order = $orderController->getOrder($orderId);
 } else {
     $user = $userController->getUser($userId);
     $role = $user->getRole();
@@ -54,10 +53,11 @@ $cars = $carController->getCars();
 $drivers = $driverController->getDrivers();
 $clients = $clientController->getClients();
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['order_price'] ?? null;
     $orderDateTime = $_POST['order_datetime'] ?? null;
-    $baby = isset($_POST['order_baby']) ? 1 : 0;
+    $baby = isset($_POST['order_baby']) ?? null;
     $carId = $_POST['car_id'] ?? null;
     $driverId = $_POST['driver_id'] ?? null;
     $clientId = $_POST['client_id'] ?? null;
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $order = new Order($orderId, $price, $orderDateTime, $baby, $carId, $driverId, $clientId);
         $orderController->editOrder($order);
     }
-    header("Location: user_orders.php?user_id=$userId");
+    header("Location: orders.php?user_id=$userId");
     exit;
 }
 
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header class="d-flex justify-content-center py-3 border-bottom">
         <ul class="nav nav-pills">
             <li class="nav-item mx-2"><a href="../" role="button" class="btn btn-secondary">Выбор пользователей</a></li>
-            <li class="nav-item mx-2"><a href="user_orders.php?user_id=<?= $userId ?>" role="button" class="btn btn-secondary">Мои заказы</a></li>
+            <li class="nav-item mx-2"><a href="orders.php?user_id=<?= $userId ?>" role="button" class="btn btn-secondary">Мои заказы</a></li>
         </ul>
     </header>
 
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3">
                 <label for="orderBaby" class="form-label">Детское кресло</label>
-                <input type="checkbox" class="form-check-input" id="orderBaby" name="order_baby" value="1" <?= $order->isBaby() ? 'checked' : '' ?>>
+                <input type="checkbox" class="form-check-input" id="orderBaby" name="order_baby" value="1" <?= $order->isBaby() ? 'checked' : '' ?>
             </div>
 
             <div class="mb-3">

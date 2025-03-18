@@ -45,9 +45,10 @@ if ($client) {
 
     <header class="d-flex justify-content-center py-3 border-bottom">
         <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a href="/" role="button" class="btn btn-secondary">Назад к выбору пользователей</a>
-            </li>
+            <li class="nav-item mx-2"><a href="/" role="button" class="btn btn-secondary">Выбор пользователей</a></li>
+            <?php if ($driver): ?>
+                <li class="nav-item mx-2"><a href="../cars/cars.php" role="button" class="btn btn-secondary">Автомобили</a></li>
+            <?php endif; ?>
         </ul>
     </header>
 
@@ -56,7 +57,7 @@ if ($client) {
 
     <div class="container" style="max-width:900px">
         <div class="w-100 text-center">
-            <a role="button" class="btn btn-primary text-center" href="order_form.php?user_id=<?= $user->getUserId() ?>">Новый заказ</a>
+            <a role="button" class="btn btn-primary text-center" href="form.php?user_id=<?= $userId ?>">Новый заказ</a>
         </div>
         <?php if (empty($orders)): ?>
             <p class="text-center text-muted">Нет заказов для этого пользователя.</p>
@@ -70,9 +71,9 @@ if ($client) {
                     </div>
 
                     <div class="col-6 d-flex flex-row justify-content-end p-0 gap-2">
-                        <a role="button" class="btn btn-info" href="order_content.php?order_id=<?= $order->getId() ?>&user_id=<?= $user->getUserId() ?>">Информация</a>
-                        <a role="button" class="btn btn-success" href="order_form.php?order_id=<?= $order->getId() ?>&user_id=<?= $user->getUserId() ?>">Изменить</a>
-                        <a role="button" class="btn btn-danger" href="delete_order.php?order_id=<?= $order->getId() ?>&user_id=<?= $user->getUserId() ?>">Удалить</a>
+                        <a role="button" class="btn btn-info" href="content.php?order_id=<?= $order->getId() ?>&user_id=<?= $userId ?>">Информация</a>
+                        <a role="button" class="btn btn-success" href="form.php?order_id=<?= $order->getId() ?>&user_id=<?= $userId ?>">Изменить</a>
+                        <a role="button" class="btn btn-danger" href="delete.php?order_id=<?= $order->getId() ?>&user_id=<?= $userId ?>">Удалить</a>
                     </div>
 
                 </div>

@@ -45,7 +45,7 @@ if ($show === 'clients') {
                 <div class="col-5"><h4><?= $user->getName(); ?></h4></div>
                 <div class="col-4"><h5><?= $user->getBirthday(); ?></h5></div>
                 <div class="col-3">
-                    <a role="button" class="btn btn-success" href="orders/user_orders.php?user_id=<?= $user->getUserId() ?>">Выбрать</a>
+                    <a role="button" class="btn btn-success" href="orders/orders.php?user_id=<?= $user->getUserId() ?>">Выбрать</a>
                 </div>
             </div>
         <?php endforeach; ?>

@@ -39,4 +39,47 @@ class CarController extends DatabaseHandler
         $stmt->close();
         return null;
     }
+
+    public function addCar($car): void
+    {
+        $sql = "INSERT INTO cars (number, release_year, baby_seat) 
+                VALUES (?, ?, ?)";
+        $stmt = $this->connection->prepare($sql);
+        $number = $car->getNumber();
+        $releaseYear = $car->getReleaseYear();
+        $babySeat = $car->hasBabySeat();
+        $stmt->bind_param(
+            "sii",
+            $number,
+            $releaseYear,
+            $babySeat,
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function editCar($car): void
+    {
+        $sql = "UPDATE cars SET number=?, release_year=?, baby_seat=? WHERE id=?";
+        $stmt = $this->connection->prepare($sql);
+        $number = $car->getNumber();
+        $releaseYear = $car->getReleaseYear();
+        $babySeat = $car->hasBabySeat() ?? 0;
+        $id = $car->getId();
+        $stmt->bind_param(
+            "siii",
+            $number,
+            $releaseYear,
+            $babySeat,
+            $id
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function deleteCar(int $id): void
+    {
+        $sql = "DELETE FROM cars WHERE id = $id";
+        $this->connection->query($sql);
+    }
 }

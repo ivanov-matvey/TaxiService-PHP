@@ -54,7 +54,7 @@ class OrderController extends DatabaseHandler
         return [];
     }
 
-    public function addOrder(Order $order): void
+    public function addOrder($order): void
     {
         $sql = "INSERT INTO orders (price, order_datetime, baby, car_id, driver_id, client_id) 
                 VALUES (?, ?, ?, ?, ?, ?)";
@@ -78,7 +78,7 @@ class OrderController extends DatabaseHandler
         $stmt->close();
     }
 
-    public function editOrder(Order $order): void
+    public function editOrder($order): void
     {
         $sql = "UPDATE orders SET price=?, order_datetime=?, baby=?, car_id=?, driver_id=?, client_id=? WHERE id=?";
         $stmt = $this->connection->prepare($sql);
