@@ -11,5 +11,19 @@ include_once __DIR__ . '/../models/Car.php';
 
 class CarController extends DatabaseHandler
 {
+    function GetCars(): array
+    {
+        $sql = "SELECT * FROM cars";
+        $stmt = $this->connection->query($sql);
+        $cars = array();
+        if ($stmt->num_rows > 0) {
+            while ($row = $stmt->fetch_assoc()) {
+                $car = new Car($row["id"], $row["number"], $row["release_year"], $row["baby_seat"]);
+                $cars[] = $car;
+            }
+            $stmt->close();
+        }
+        return $cars;
+    }
 
 }

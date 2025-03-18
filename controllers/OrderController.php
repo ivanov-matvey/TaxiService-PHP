@@ -11,6 +11,28 @@ include_once __DIR__ . '/../models/Order.php';
 
 class OrderController extends DatabaseHandler
 {
+    public function getOrder(int $id): ?Order
+    {
+        $sql = "SELECT * FROM orders WHERE id = $id";
+        $stmt = $this->connection->query($sql);
+        if ($stmt->num_rows > 0) {
+            $row = $stmt->fetch_assoc();
+            $order = new Order(
+                $row["id"],
+                $row["price"],
+                $row["order_datetime"],
+                $row["baby"],
+                $row["car_id"],
+                $row["driver_id"],
+                $row["client_id"]
+            );
+            $stmt->close();
+            return $order;
+        }
+        $stmt->close();
+        return null;
+    }
+
     public function getOrdersByUserId(int $userId): array
     {
         $clientQuery = "SELECT id FROM clients WHERE user_id = $userId";
@@ -32,14 +54,39 @@ class OrderController extends DatabaseHandler
         return [];
     }
 
+    public function addOrder(Order $order): void
+    {
+        $sql = "INSERT INTO orders (price, order_datetime, baby, car_id, driver_id, client_id) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($sql);
+        $price = $order->getPrice();
+        $datetime = $order->getOrderDatetime();
+        $baby = $order->isBaby();
+        $carId = $order->getCarId();
+        $driverId = $order->getDriverId();
+        $clientId = $order->getClientId();
+        $stmt->bind_param(
+            "dsiiii",
+            $price,
+        $datetime,
+            $baby,
+            $carId,
+            $driverId,
+            $clientId
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
+
+
     private function fetchOrders(string $column, int $id): array
     {
         $sql = "SELECT * FROM orders WHERE $column = $id";
-        $result = $this->connection->query($sql);
+        $stmt = $this->connection->query($sql);
         $orders = [];
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($stmt->num_rows > 0) {
+            while ($row = $stmt->fetch_assoc()) {
                 $orders[] = new Order(
                     $row["id"],
                     $row["price"],
@@ -50,7 +97,7 @@ class OrderController extends DatabaseHandler
                     $row["client_id"]
                 );
             }
-            $result->close();
+            $stmt->close();
         }
 
         return $orders;
