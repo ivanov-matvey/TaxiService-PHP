@@ -24,13 +24,10 @@ $client = $clientController->getClientByUserId($userId);
 $driver = $driverController->getDriverByUserId($userId);
 
 $user = null;
-//$role = null;
 if ($client) {
     $user = $client;
-//    $role = "client";
 } else if ($driver) {
     $user = $driver;
-//    $role = "driver";
 } else {
     header("Location: ../");
 }
