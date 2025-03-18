@@ -14,15 +14,45 @@ class DriverController extends DatabaseHandler
     function GetDrivers(): array
     {
         $sql = "SELECT * FROM drivers";
-        $result = $this->connection->query($sql);
+        $stmt = $this->connection->query($sql);
         $drivers = array();
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($stmt->num_rows > 0) {
+            while ($row = $stmt->fetch_assoc()) {
                 $driver = new Driver($row["id"], $row["name"], $row["birthday"], $row["rate"], $row["user_id"]);
                 $drivers[] = $driver;
             }
-            $result->close();
+            $stmt->close();
         }
         return $drivers;
+    }
+
+    public function getDriver(int $id): ?Driver
+    {
+        $sql = "SELECT * FROM drivers WHERE id = $id";
+        $stmt = $this->connection->query($sql);
+        if ($stmt->num_rows > 0) {
+            $row = $stmt->fetch_assoc();
+            $driver = new Driver($row["id"], $row["name"], $row["birthday"], $row["rate"], $row["user_id"]);
+            $stmt->close();
+            return $driver;
+        }
+        $stmt->close();
+        return null;
+    }
+
+    public function getDriverByUserId(?int $id): ?Driver
+    {
+        if ($id === null) return null;
+
+        $sql = "SELECT * FROM drivers WHERE user_id = $id";
+        $stmt = $this->connection->query($sql);
+        if ($stmt->num_rows > 0) {
+            $row = $stmt->fetch_assoc();
+            $driver = new Driver($row["id"], $row["name"], $row["birthday"], $row["rate"], $row["user_id"]);
+            $stmt->close();
+            return $driver;
+        }
+        $stmt->close();
+        return null;
     }
 }
