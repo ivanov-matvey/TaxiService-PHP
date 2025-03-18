@@ -16,43 +16,15 @@ class User {
         $this->role = $role;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
+    public function getId() { return $this->id; }
+    public function setId($id): void { $this->id = $id; }
 
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
+    public function getPhone() { return $this->phone; }
+    public function setPhone($phone): void { $this->phone = $phone; }
 
-    public function getPhone()
-    {
-        return $this->phone;
-    }
+    public function getPasswordHash() { return $this->passwordHash; }
+    public function setPasswordHash($passwordHash): void { $this->passwordHash = $passwordHash; }
 
-    public function setPhone($phone): void
-    {
-        $this->phone = $phone;
-    }
-
-    public function getPasswordHash()
-    {
-        return $this->passwordHash;
-    }
-
-    public function setPasswordHash($passwordHash): void
-    {
-        $this->passwordHash = $passwordHash;
-    }
-
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    public function setRole($role): void
-    {
-        $this->role = $role;
-    }
+    public function getRole() { return $this->role; }
+    public function setRole($role): void { $this->role = $role; }
 }
