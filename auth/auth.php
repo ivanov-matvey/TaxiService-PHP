@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             <?php endif; ?>
             <div class="mb-3">
-                <label for="phone" class="form-label">Телефон</label>
+                <label for="phone" class="form-label">Номер телефона</label>
                 <input type="text" class="form-control <?= !empty($phoneError) ? 'is-invalid' : '' ?>" id="phone" name="phone" placeholder="89998887766" value="<?= htmlspecialchars($phone ?? '') ?>" required>
                 <?php if (!empty($phoneError)): ?>
                     <div class="invalid-feedback"><?= htmlspecialchars($phoneError) ?></div>

@@ -49,7 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
                 </li>
             </ul>
-            <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="../account/account.php" class="btn btn-outline-primary">Аккаунт</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+                </li>
+            </ul>
         </div>
     </header>
 
@@ -61,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h5 class="text-center">Вы действительно хотите удалить автомобиль "<?= $carNumber ?> (<?= $carReleaseYear ?>)"?</h5>
             </div>
             <input type="hidden" id="carId" name="car_id" value="<?= $carId ?>">
-            <div class="row mb-3 w-100 text-center">
-                <div class="col-6"><input type="submit" class="btn btn-danger" value="Удалить"></div>
-                <div class="col-6"><a href="cars.php" role="button" class="btn btn-secondary">Не удалять</a></div>
+            <div class="d-flex flex-row gap-2 justify-content-center">
+                <input type="submit" class="btn btn-outline-danger" value="Удалить">
+                <a href="cars.php" role="button" class="btn btn-secondary">Не удалять</a>
             </div>
         </form>
     </div>

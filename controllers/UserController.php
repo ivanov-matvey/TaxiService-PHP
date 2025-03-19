@@ -88,6 +88,10 @@ class UserController extends DatabaseHandler
     public function loginUser($phone, $password): void
     {
         try {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
             $sql = "SELECT * FROM users WHERE phone = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param("s", $phone);
@@ -113,4 +117,104 @@ class UserController extends DatabaseHandler
             throw $error;
         }
     }
+
+    public function editUser($userId, $phone, $name, $birthday, $rate): void
+    {
+        try {
+            $this->connection->begin_transaction();
+
+            $sql = "SELECT id FROM users WHERE phone = ? AND id != ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param(
+                "si",
+                $phone,
+                $userId
+            );
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                throw new Exception("Пользователь с таким номером уже существует");
+            }
+            $stmt->close();
+
+            $sql = "UPDATE users SET phone = ? WHERE id = ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param(
+                "si",
+                $phone,
+                $userId
+            );
+            $stmt->execute();
+
+            if ($_SESSION['role'] === 'client') {
+                $sql = "UPDATE clients SET name = ?, birthday = ?, rate = ? WHERE user_id = ?";
+            } else {
+                $sql = "UPDATE drivers SET name = ?, birthday = ?, rate = ? WHERE user_id = ?";
+            }
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param(
+                "ssdi",
+                $name,
+                $birthday,
+                $rate,
+                $userId
+            );
+            $stmt->execute();
+
+            $this->connection->commit();
+
+            header("Location: ../account/account.php");
+            exit();
+        } catch (Exception $error) {
+            $this->connection->rollBack();
+            throw $error;
+        }
+    }
+
+    public function deleteUser($userId): void
+    {
+        try {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $this->connection->begin_transaction();
+
+            $sql = "SELECT role FROM users WHERE id = ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+
+            if ($user['role'] === 'client') {
+                $sql = "DELETE FROM clients WHERE user_id = ?";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bind_param("i", $userId);
+                $stmt->execute();
+            } else if ($user['role'] === 'driver') {
+                $sql = "DELETE FROM drivers WHERE user_id = ?";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bind_param("i", $userId);
+                $stmt->execute();
+            }
+
+            $sql = "DELETE FROM users WHERE id = ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+
+            $this->connection->commit();
+
+            session_unset();
+            session_destroy();
+
+            header("Location: ../auth/auth.php");
+            exit();
+        } catch (Exception $error) {
+            $this->connection->rollBack();
+            throw $error;
+        }
+    }
+
 }
