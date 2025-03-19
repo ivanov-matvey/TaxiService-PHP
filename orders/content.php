@@ -98,7 +98,7 @@ $carReleaseYear = $car->getReleaseYear();
             <h5 class="text-muted">Детское кресло: <span class="text-dark"><?= $orderIsBaby ?></span></h5>
         </div>
         <div class="text-center">
-            <a role="button" class="btn btn-success text-center" href="form.php">Редактировать</a>
+            <a role="button" class="btn btn-success text-center" href="form.php?order_id=<?= $orderId ?>">Редактировать</a>
         </div>
     </div>
 

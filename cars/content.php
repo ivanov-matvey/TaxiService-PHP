@@ -21,7 +21,7 @@ $car = $carController->getCar($carId);
 
 $carNumber = $car->getNumber();
 $carReleaseYear = $car->getReleaseYear();
-$carHasBabySeat = $car->hasBabySeat() ? "Есть" : "Нет";
+$carHasBabySeat = $car->hasBabySeat() ? "есть" : "нет";
 
 ?>
 
@@ -57,10 +57,10 @@ $carHasBabySeat = $car->hasBabySeat() ? "Есть" : "Нет";
 
     <h2 class="text-center text-primary mt-4 mb-4">Информация об автомобиле</h2>
 
-    <div class="container" style="max-width:900px">
-        <h5 class="text-center">Номер: <?= $carNumber ?></h5>
-        <h5 class="text-center">Год выпуска: <?= $carReleaseYear ?></h5>
-        <h5 class="text-center">Наличие детского кресла: <?= $carHasBabySeat ?></h5>
+    <div class="text-center mb-3">
+        <h5 class="text-muted">Номер: <span class="text-dark"><?= $carNumber ?></span></h5>
+        <h5 class="text-muted">Год выпуска: <span class="text-dark"><?= $carReleaseYear ?></span></h5>
+        <h5 class="text-muted">Наличие детского кресла: <span class="text-dark"><?= $carHasBabySeat ?></span></h5>
     </div>
 
 </body>
