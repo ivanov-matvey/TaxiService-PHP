@@ -22,6 +22,7 @@ if ($show === 'clients') {
     $switchTo = "clients";
     $switchLabel = "Показать клиентов";
 }
+
 ?>
 
 

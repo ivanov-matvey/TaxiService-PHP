@@ -49,6 +49,7 @@ if ($client) {
             <?php if ($driver): ?>
                 <li class="nav-item mx-2"><a href="../cars/cars.php" role="button" class="btn btn-secondary">Автомобили</a></li>
             <?php endif; ?>
+            <a href="../auth/logout.php" class="btn btn-danger">Выйти</a>
         </ul>
     </header>
 

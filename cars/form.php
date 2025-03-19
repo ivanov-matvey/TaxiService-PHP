@@ -26,7 +26,7 @@ $carHasBabySeat = $car->hasBabySeat() ? 'checked' : '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $number = $_POST['number'] ?? null;
     $releaseYear = $_POST['release_year'] ?? null;
-    $babySeat = $_POST['baby_seat'] ?? null;
+    $babySeat = isset($_POST['baby_seat']) ?? null;
 
     if ($carId === null) {
         $car = new Car(NULL, $number, $releaseYear, $babySeat);
