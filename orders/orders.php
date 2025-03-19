@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use controllers\OrderController;
 use controllers\ClientController;
 use controllers\DriverController;
@@ -8,7 +10,8 @@ include_once __DIR__ . "/../controllers/OrderController.php";
 include_once __DIR__ . "/../controllers/ClientController.php";
 include_once __DIR__ . "/../controllers/DriverController.php";
 
-$userId = $_GET['user_id'] ?? null;
+$userId = $_SESSION['user_id'] ?? null;
+$role = $_SESSION['role'] ?? null;
 
 if (!$userId) {
     header("Location: ../");
@@ -20,16 +23,12 @@ $clientController = new ClientController();
 $driverController = new DriverController();
 
 $orders = $orderController->getOrdersByUserId($userId);
-$client = $clientController->getClientByUserId($userId);
-$driver = $driverController->getDriverByUserId($userId);
 
 $user = null;
-if ($client) {
-    $user = $client;
-} else if ($driver) {
-    $user = $driver;
+if ($role == "client") {
+    $user = $clientController->getClientByUserId($userId);
 } else {
-    header("Location: ../");
+    $user = $driverController->getDriverByUserId($userId);
 }
 
 ?>
@@ -38,27 +37,33 @@ if ($client) {
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Заказы пользователя</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></head>
+    <title>Заказы</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
-    <header class="d-flex justify-content-center py-3 border-bottom">
-        <ul class="nav nav-pills">
-            <li class="nav-item mx-2"><a href="/" role="button" class="btn btn-secondary">Выбор пользователей</a></li>
-            <?php if ($driver): ?>
-                <li class="nav-item mx-2"><a href="../cars/cars.php" role="button" class="btn btn-secondary">Автомобили</a></li>
-            <?php endif; ?>
-            <a href="../auth/logout.php" class="btn btn-danger">Выйти</a>
-        </ul>
+    <header class="border-bottom">
+        <div class="container d-flex justify-content-between py-3">
+            <ul class="nav nav-pills">
+                <?php if ($role == "driver"): ?>
+                    <li class="nav-item">
+                        <a href="../cars/cars.php" role="button" class="nav-link">Автомобили</a>
+                    </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a href="../orders/orders.php" role="button" class="nav-link active">Заказы</a>
+                </li>
+            </ul>
+            <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+        </div>
     </header>
 
     <h2 class="text-center text-primary mt-4">Мои заказы</h2>
     <h5 class="text-center mb-4"><?= $user->getName() ?></h5>
 
-    <div class="container" style="max-width:900px">
+    <div class="container">
         <div class="w-100 text-center">
-            <a role="button" class="btn btn-primary text-center" href="form.php?user_id=<?= $userId ?>">Новый заказ</a>
+            <a role="button" class="btn btn-primary text-center" href="form.php">Новый заказ</a>
         </div>
         <?php if (empty($orders)): ?>
             <p class="text-center text-muted">Нет заказов для этого пользователя.</p>
@@ -72,9 +77,9 @@ if ($client) {
                     </div>
 
                     <div class="col-6 d-flex flex-row justify-content-end p-0 gap-2">
-                        <a role="button" class="btn btn-info" href="content.php?order_id=<?= $order->getId() ?>&user_id=<?= $userId ?>">Информация</a>
-                        <a role="button" class="btn btn-success" href="form.php?order_id=<?= $order->getId() ?>&user_id=<?= $userId ?>">Изменить</a>
-                        <a role="button" class="btn btn-danger" href="delete.php?order_id=<?= $order->getId() ?>&user_id=<?= $userId ?>">Удалить</a>
+                        <a role="button" class="btn btn-info" href="content.php?order_id=<?= $order->getId() ?>">Информация</a>
+                        <a role="button" class="btn btn-success" href="form.php?order_id=<?= $order->getId() ?>">Изменить</a>
+                        <a role="button" class="btn btn-danger" href="delete.php?order_id=<?= $order->getId() ?>">Удалить</a>
                     </div>
 
                 </div>

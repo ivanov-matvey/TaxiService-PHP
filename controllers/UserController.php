@@ -105,7 +105,6 @@ class UserController extends DatabaseHandler
             }
 
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['phone'] = $user['phone'];
             $_SESSION['role'] = $user['role'];
 
             header("Location: ../orders/orders.php");
