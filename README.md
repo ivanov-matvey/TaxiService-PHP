@@ -54,7 +54,7 @@
       private $name;
       private $birthday;
       private $rate;
-      private $user_id;
+      private $userId;
   
       public function __construct($id, $name, $birthday, $rate, $userId) {
           $this->id = $id;
@@ -95,7 +95,7 @@
       private $name;
       private $birthday;
       private $rate;
-      private $user_id;
+      private $userId;
   
       public function __construct($id, $name, $birthday, $rate, $userId)
       {
@@ -218,50 +218,78 @@
 
 ## Страницы
 
-<details><summary>Страница с заказами клиента</summary>
+<details><summary>Авторизация</summary>
   
-  - На этой странице выводятся все заказы конкретного клиента
-  - Есть кнопка добавления нового заказа
-  - Каждый заказ можно изменить удалить или посмотреть информацию
+  - На этой странице выводится форма авторизации
+  - Если пользователь не найден или пароль не верный, пользователь увидит ошибку
+  - На странице есть ссылка на регистрацию
   
-  ![image](https://github.com/user-attachments/assets/9cb6cd9b-0c6b-4552-afde-94ac0c59d70b)
+  ![image](https://github.com/user-attachments/assets/eb41e347-6a75-4bf8-b11e-afe3c474c82a)
 
 </details>
 
-<details><summary>Страница добавления нового заказа</summary>
+<details><summary>Регистрация</summary>
+
+  - На этой странице выводится форма регистрации
+  - Если номер телефона уже занят или пароли не совпадают, пользователь увидит ошибку
+  - После регистрации пользователь перенаправляется на страницу входа
+  - На странице есть ссылка на вход
   
-  - На этой странице можно добавить новый заказ
+  ![image](https://github.com/user-attachments/assets/9948783d-d300-4f4d-acbc-3c10be79263a)
+
+</details>
+
+<details><summary>Заказы</summary>
+
+  - На этой странице выводятся все заказы конкретного клиента
+  - В зависимости от роли в шапке страницы может быть ссылка на страницу автомобилей
+  - Есть кнопка добавления нового заказа
+  - Каждый заказ можно изменить удалить или посмотреть информацию
+
+  ##### Роль: клиент
+  ![image](https://github.com/user-attachments/assets/67735daf-1e84-4380-9fcb-0897a39c3724)
+  ##### Роль: водитель
+  ![image](https://github.com/user-attachments/assets/e82c27b3-418e-4ad5-a19c-af3e8784554b)
+
+</details>
+
+<details><summary>Добавление заказа</summary>
+  
+  - На этой странице выводится форма добавления заказа
   - В поле выбора автомобиля выводятся номер и год выпуска
   - В зависимости от выбранного пользователя отображается поле выбора водителя или клиента
   - В поле выбора водителя/клиента выводится номер
-  
-  ![image](https://github.com/user-attachments/assets/dac21209-d6ff-4e2d-9789-d2d2f8328848)
+
+  ##### Роль: клиент
+  ![image](https://github.com/user-attachments/assets/41e93fea-aea6-4c0a-bb6b-9423128487da)
+  ##### Роль: водитель
+  ![image](https://github.com/user-attachments/assets/4fa8a1c5-51b8-437d-a69c-3e3955f04a37)
 
 </details>
 
-<details><summary>Страница информации о заказе</summary>
+<details><summary>Информация о заказе</summary>
   
   - На этой странице выводится информация о конкретном заказе
   
-  ![image](https://github.com/user-attachments/assets/5225ba63-bbcc-4da6-8006-d706be8fd8f9)
+  ![image](https://github.com/user-attachments/assets/c7bd7868-39de-4d31-8c57-b97230b6f245)
 
 </details>
 
-<details><summary>Страница изменения заказа</summary>
+<details><summary>Изменение заказа</summary>
   
-  - На этой странице можно изменить данные конкретного заказа
+  - На этой странице выводится форма изменения заказа
   - При открытии страницы все поля заполняются данными заказа автоматически
   
-  ![image](https://github.com/user-attachments/assets/53f9d693-e658-45a0-a614-0285ab87a87e)
+  ![image](https://github.com/user-attachments/assets/5f90f693-24a4-45ba-b350-899619f65d77)
 
 </details>
 
-<details><summary>Страница удаления заказа</summary>
+<details><summary>Удаление заказа</summary>
   
   - На этой странице пользователь подтверждает удаление заказа
   - После удаления заказа пользователь попадает на страницу со своими заказами
   
-  ![image](https://github.com/user-attachments/assets/fceb3964-c1fa-45cc-b523-828cad95f0d7)
+  ![image](https://github.com/user-attachments/assets/badc1d4e-88aa-4270-a098-c766bca3e94f)
 
 </details>
 
@@ -277,46 +305,82 @@
 
 </details>
 
-<details><summary>Страница с автомобилями</summary>
+<details><summary>Автомобили</summary>
   
   - На этой странице выводятся все автомобили
   - Есть кнопка добавления нового автомобиля
   - Каждый автомобиль можно изменить удалить или посмотреть информацию
   
-  ![image](https://github.com/user-attachments/assets/c19b7d78-14ea-4689-b3cb-c03d00b40e72)
+  ![image](https://github.com/user-attachments/assets/9ef27b84-01e1-46d1-9085-812227ffccc2)
 
 </details>
 
-<details><summary>Страница добавления нового автомобиля</summary>
+<details><summary>Добавление автомобиля</summary>
   
-  - На этой странице можно добавить новый автомобиль
+  - На этой странице выводится форма добавления автомобиля
   
-  ![image](https://github.com/user-attachments/assets/3554a80f-101d-4d48-bda6-4963d5656aa7)
+  ![image](https://github.com/user-attachments/assets/66ad34b8-82f3-4950-a4bc-6dc7a68354e9)
 
 </details>
 
-<details><summary>Страница информации об автомобиле</summary>
+<details><summary>Информация об автомобиле</summary>
   
   - На этой странице выводится информация о конкретном автомобиле
   
-  ![image](https://github.com/user-attachments/assets/338e803f-0be4-469f-94e6-246fc4867e7a)
+  ![image](https://github.com/user-attachments/assets/6b766385-72c8-41d0-952a-a8e8eb6b8dd1)
 
 </details>
 
-<details><summary>Страница изменения автомобиля</summary>
+<details><summary>Изменение автомобиля</summary>
   
-  - На этой странице можно изменить данные конкретного автомобиля
+  - На этой странице выводится форма изменения автомобиля
   - При открытии страницы все поля заполняются данными автомобиля автоматически
   
-  ![image](https://github.com/user-attachments/assets/344703fa-a7ff-470e-a9c2-bed791820170)
+  ![image](https://github.com/user-attachments/assets/2b247fad-4603-4aee-b61c-a2916bc1a0e3)
 
 </details>
 
-<details><summary>Страница удаления автомобиля</summary>
+<details><summary>Удаление автомобиля</summary>
   
   - На этой странице пользователь подтверждает удаление автомобиля
   - После удаления автомобиля пользователь попадает на страницу со всеми автомобилями
   
-  ![image](https://github.com/user-attachments/assets/27480231-5dbc-4e70-94aa-cbcd4b3ed5b6)
+  ![image](https://github.com/user-attachments/assets/bb93c2fe-b74f-4d2a-8f42-0477bce0d94b)
+
+</details>
+
+<details><summary>Аккаунт</summary>
+  
+  - На этой странице выводится информация о пользователе
+  - Есть кнопки редактирования и удаления аккаунта
+  
+  ![image](https://github.com/user-attachments/assets/0379ac5e-65f4-467b-89fb-01bdad7690d1)
+
+</details>
+
+<details><summary>Изменение аккаунта</summary>
+  
+  - На этой странице выводится форма изменения данных аккаунта
+  - При открытии страницы все поля заполняются данными аккаунта автоматически 
+  
+  ![image](https://github.com/user-attachments/assets/4fdc94b5-d8ee-497d-826d-3305107c9532)
+
+</details>
+
+<details><summary>Удаление аккаунта</summary>
+  
+  - На этой странице пользователь подтверждает удаление аккаунта
+  - После удаления аккаунта пользователь попадает на страницу авторизации
+  
+  ![image](https://github.com/user-attachments/assets/40f3bc4f-cfd3-4977-af8c-51ef7f4a4321)
+
+</details>
+
+<details><summary>Выход из аккаунта</summary>
+  
+  - На этой странице пользователь подтверждает выход из аккаунта
+  - После выхода пользователь перенаправляется на страницу авторизации
+  
+  ![image](https://github.com/user-attachments/assets/dc02080f-dc64-4eb2-8ed2-b9f76c3167d0)
 
 </details>
