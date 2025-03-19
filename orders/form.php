@@ -91,7 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
                 </li>
             </ul>
-            <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="../account/account.php" class="btn btn-outline-primary">Аккаунт</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+                </li>
+            </ul>
         </div>
     </header>
 
@@ -112,49 +119,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="checkbox" class="form-check-input" id="orderBaby" name="order_baby" value="1" <?= $order->isBaby() ? 'checked' : '' ?>
             </div>
 
-            <div class="mb-3">
-                <label for="orderCar" class="form-label">Выберите автомобиль</label>
-                <select class="form-select" id="orderCar" name="car_id">
-                    <option value="">-- Выберите автомобиль --</option>
-                    <?php foreach ($cars as $car): ?>
-                        <option value="<?= $car->getId() ?>" <?= $car->getId() == $order->getCarId() ? 'selected' : '' ?>>
-                            <?= $car->getNumber() ?> (<?= $car->getReleaseYear() ?>)
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+            <div class="d-flex flex-row gap-2 mb-3 w-100">
+                <div class="w-100">
+                    <label for="orderCar" class="form-label">Выберите автомобиль</label>
+                    <select class="form-select" id="orderCar" name="car_id">
+                        <option value="">-- Выберите автомобиль --</option>
+                        <?php foreach ($cars as $car): ?>
+                            <option value="<?= $car->getId() ?>" <?= $car->getId() == $order->getCarId() ? 'selected' : '' ?>>
+                                <?= $car->getNumber() ?> (<?= $car->getReleaseYear() ?>)
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="w-100">
+                    <?php if (!$client): ?>
+                        <label for="orderClient" class="form-label">Выберите клиента</label>
+                        <select class="form-select" id="orderClient" name="client_id">
+                            <option value="">-- Выберите клиента --</option>
+                            <?php foreach ($clients as $client): ?>
+                                <option value="<?= $client->getId() ?>" <?= $client->getId() == $order->getClientId() ? 'selected' : '' ?>>
+                                    <?= $userController->getUser($client->getUserId())->getPhone(); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <input type="hidden" name="client_id" value="<?= $client->getId() ?>">
+                    <?php endif; ?>
+                    <?php if (!$driver): ?>
+                        <label for="orderDriver" class="form-label">Выберите водителя</label>
+                        <select class="form-select" id="orderDriver" name="driver_id">
+                            <option value="">-- Выберите водителя --</option>
+                            <?php foreach ($drivers as $driver): ?>
+                                <option value="<?= $driver->getId() ?>" <?= $driver->getId() == $order->getDriverId() ? 'selected' : '' ?>>
+                                    <?= $userController->getUser($driver->getUserId())->getPhone(); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <input type="hidden" name="driver_id" value="<?= $driver->getId() ?>">
+                    <?php endif; ?>
+                </div>
             </div>
-
-            <?php if (!$client): ?>
-                <div class="mb-3">
-                    <label for="orderClient" class="form-label">Выберите клиента</label>
-                    <select class="form-select" id="orderClient" name="client_id">
-                        <option value="">-- Выберите клиента --</option>
-                        <?php foreach ($clients as $client): ?>
-                            <option value="<?= $client->getId() ?>" <?= $client->getId() == $order->getClientId() ? 'selected' : '' ?>>
-                                <?= $userController->getUser($client->getUserId())->getPhone(); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            <?php else: ?>
-                <input type="hidden" name="client_id" value="<?= $client->getId() ?>">
-            <?php endif; ?>
-
-            <?php if (!$driver): ?>
-                <div class="mb-3">
-                    <label for="orderDriver" class="form-label">Выберите водителя</label>
-                    <select class="form-select" id="orderDriver" name="driver_id">
-                        <option value="">-- Выберите водителя --</option>
-                        <?php foreach ($drivers as $driver): ?>
-                            <option value="<?= $driver->getId() ?>" <?= $driver->getId() == $order->getDriverId() ? 'selected' : '' ?>>
-                                <?= $userController->getUser($driver->getUserId())->getPhone(); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            <?php else: ?>
-                <input type="hidden" name="driver_id" value="<?= $driver->getId() ?>">
-            <?php endif; ?>
 
             <div class="mb-3">
                 <input type="submit" class="btn btn-success" value="Сохранить">

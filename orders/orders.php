@@ -54,7 +54,14 @@ if ($role == "client") {
                     <a href="../orders/orders.php" role="button" class="nav-link active">Заказы</a>
                 </li>
             </ul>
-            <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="../account/account.php" class="btn btn-outline-primary">Аккаунт</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+                </li>
+            </ul>
         </div>
     </header>
 
