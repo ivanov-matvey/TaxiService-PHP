@@ -4,14 +4,14 @@ session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use controllers\OrderController;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\Writer\Word2007;
+use controllers\ReportController;
 
-include_once __DIR__ . "/../controllers/OrderController.php";
+include_once __DIR__ . "/../controllers/ReportController.php";
 
-$orderController = new OrderController();
-$orders = $orderController->getAllOrdersWithDrivers();
+$reportController = new ReportController();
+$reportData = $reportController->getAllOrdersWithDrivers();
 
 $phpWord = new PhpWord();
 $section = $phpWord->addSection();
@@ -24,12 +24,12 @@ $table->addCell()->addText('Цена');
 $table->addCell()->addText('Водитель');
 $table->addCell()->addText('Рейтинг');
 
-foreach ($orders as $order) {
+foreach ($reportData as $data) {
     $table->addRow();
-    $table->addCell()->addText($order['order_datetime']);
-    $table->addCell()->addText($order['price']);
-    $table->addCell()->addText($order['driver_name'] ?? '—');
-    $table->addCell()->addText($order['driver_rate'] ?? '—');
+    $table->addCell()->addText($data['order_datetime']);
+    $table->addCell()->addText($data['price']);
+    $table->addCell()->addText($data['driver_name'] ?? '—');
+    $table->addCell()->addText($data['driver_rate'] ?? '—');
 }
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
