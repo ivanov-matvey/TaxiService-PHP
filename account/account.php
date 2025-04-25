@@ -55,6 +55,15 @@ $userRole = $role == "client" ? "клиент" : "водитель";
                 <li class="nav-item">
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
                 </li>
+                <li class="nav-item">
+                    <a href="../reports/orders_driver_report.php" role="button" class="nav-link">Отчет 1</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../reports/cars_order_report.php" role="button" class="nav-link">Отчет 2</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../reports/clients_order_report.php" role="button" class="nav-link">Отчет 3</a>
+                </li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="nav-item">

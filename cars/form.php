@@ -37,15 +37,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $releaseYear = $_POST['release_year'] ?? null;
     $babySeat = isset($_POST['baby_seat']) ?? null;
 
-    if ($carId === null) {
-        $car = new Car(NULL, $number, $releaseYear, $babySeat);
-        $carController->addCar($car);
-    } else {
-        $car = new Car($carId, $number, $releaseYear, $babySeat);
-        $carController->editCar($car);
+    $numberError = "";
+    $yearError = "";
+
+    if (!preg_match('/^[A-Za-z]\d{3}[A-Za-z]{2}$/', $number)) {
+        $numberError = "Введите номер в формате A000AA";
     }
-    header("Location: cars.php");
-    exit;
+
+    $currentYear = date('Y');
+    if (!is_numeric($releaseYear) || $releaseYear < 1800 || $releaseYear > $currentYear) {
+        $yearError = "Введите год выпуска в пределах 1800-{$currentYear}";
+    }
+
+    if (empty($numberError) && empty($yearError)) {
+        if ($carId === null) {
+            $car = new Car(NULL, $number, $releaseYear, $babySeat);
+            $carController->addCar($car);
+        } else {
+            $car = new Car($carId, $number, $releaseYear, $babySeat);
+            $carController->editCar($car);
+        }
+        header("Location: cars.php");
+        exit;
+    }
 }
 
 ?>
@@ -68,6 +82,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li class="nav-item">
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
                 </li>
+                <li class="nav-item">
+                    <a href="../reports/orders_driver_report.php" role="button" class="nav-link">Отчет 1</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../reports/cars_order_report.php" role="button" class="nav-link">Отчет 2</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../reports/clients_order_report.php" role="button" class="nav-link">Отчет 3</a>
+                </li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="nav-item">
@@ -86,11 +109,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post">
             <div class="mb-3">
                 <label for="carNumber" class="form-label">Номер</label>
-                <input type="text" class="form-control" id="carNumber" name="number" value="<?= $carNumber ?>" placeholder="A000AA" required>
+                <input type="text" class="form-control <?= !empty($numberError) ? 'is-invalid' : '' ?>" id="carNumber" name="number" value="<?= $carNumber ?>" placeholder="A000AA" required>
+                <?php if (!empty($numberError)): ?>
+                    <div class="invalid-feedback"><?= htmlspecialchars($numberError) ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="releaseYear" class="form-label">Год выпуска</label>
-                <input type="text" class="form-control" id="releaseYear" name="release_year" value="<?= $carReleaseYear ?>" placeholder="1990" required>
+                <input type="text" class="form-control <?= !empty($yearError) ? 'is-invalid' : '' ?>" id="releaseYear" name="release_year" value="<?= $carReleaseYear ?>" placeholder="1990" required>
+                <?php if (!empty($yearError)): ?>
+                    <div class="invalid-feedback"><?= htmlspecialchars($yearError) ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="babySeat" class="form-label">Наличие детского кресла</label>
