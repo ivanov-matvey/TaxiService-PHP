@@ -27,13 +27,13 @@ $table->addCell()->addText('Есть дети');
 foreach ($clientsStats as $client) {
     $table->addRow();
     $table->addCell()->addText($client['client_name']);
-    $table->addCell()->addText(round($client['avg_price_last_3_months'], 2));
+    $table->addCell()->addText(round($client['avg_price_last_3_months'] ?? 0, 2));
     $table->addCell()->addText($client['has_children'] ? 'Да' : 'Нет');
 }
 
 $section->addTextBreak(1);
 $section->addText("Всего клиентов: " . $childrenStats['total']);
-$section->addText("С детьми: " . $childrenStats['with_children']);
+$section->addText("Клиентов с детьми: " . $childrenStats['with_children']);
 $section->addText("Процент клиентов с детьми: " . $childrenStats['percent'] . "%");
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');

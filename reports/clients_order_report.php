@@ -70,7 +70,9 @@ $childrenStats = $reportController->getChildrenStats();
         </div>
 
         <div class="mb-3">
-            <p class="fs-5">Процент клиентов с детьми: <strong><?= $childrenStats['percent'] ?>%</strong></p>
+            <p class="mb-2">Всего клиентов: <strong><?= $childrenStats['total'] ?></strong></p>
+            <p class="mb-2">Клиентов с детьми: <strong><?= $childrenStats['with_children'] ?></strong></p>
+            <p class="mb-2">Процент клиентов с детьми: <strong><?= $childrenStats['percent'] ?>%</strong></p>
         </div>
 
         <?php if (empty($clients)): ?>

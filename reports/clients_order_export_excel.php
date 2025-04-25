@@ -23,11 +23,17 @@ $sheet->fromArray(['Имя клиента', 'Средняя цена заказ�
 $row = 2;
 foreach ($clientsStats as $client) {
     $sheet->setCellValue("A{$row}", $client['client_name']);
-    $sheet->setCellValue("B{$row}", round($client['avg_price_last_3_months'], 2));
+    $sheet->setCellValue("B{$row}", round($client['avg_price_last_3_months'] ?? 0, 2));
     $sheet->setCellValue("C{$row}", $client['has_children'] ? 'Да' : 'Нет');
     $row++;
 }
 
+$row += 1;
+$sheet->setCellValue("A{$row}", 'Всего клиентов');
+$sheet->setCellValue("B{$row}", $childrenStats['total']);
+$row += 1;
+$sheet->setCellValue("A{$row}", 'Клиентов с детьми');
+$sheet->setCellValue("B{$row}", $childrenStats['with_children']);
 $row += 1;
 $sheet->setCellValue("A{$row}", 'Процент клиентов с детьми');
 $sheet->setCellValue("B{$row}", $childrenStats['percent'] . '%');
