@@ -9,6 +9,7 @@ include_once __DIR__ . "/../controllers/CarController.php";
 include_once __DIR__ . "/../controllers/OrderController.php";
 
 $userId = $_SESSION['user_id'] ?? null;
+$role = $_SESSION['role'] ?? null;
 
 if (!$userId) {
     header("Location: ../");
@@ -46,9 +47,11 @@ if ($selectedCarId) {
     <header class="border-bottom">
         <div class="container d-flex justify-content-between py-3">
             <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a href="../cars/cars.php" role="button" class="nav-link active">Автомобили</a>
-                </li>
+                <?php if ($role == "driver"): ?>
+                    <li class="nav-item">
+                        <a href="../cars/cars.php" role="button" class="nav-link">Автомобили</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
                 </li>
