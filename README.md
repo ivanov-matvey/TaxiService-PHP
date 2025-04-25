@@ -384,3 +384,88 @@
   ![image](https://github.com/user-attachments/assets/dc02080f-dc64-4eb2-8ed2-b9f76c3167d0)
 
 </details>
+
+## Обеспечение безопасности веб-приложения
+
+### Доступ пользователей
+При входе в систему ID пользователя и его роль заносятся в сессию:
+```php
+// UserController.php
+
+public function loginUser($phone, $password): void
+{
+    // ...
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['role'] = $user['role'];
+    // ...
+}
+```
+
+С помощью этих переменных контролируется доступ пользователей на страницах:
+```php
+// orders.php
+
+<?php
+
+session_start();
+
+$userId = $_SESSION['user_id'] ?? null;
+$role = $_SESSION['role'] ?? null;
+
+if (!$userId || ($role != "driver")) {
+    header("Location: ../");
+    exit;
+}
+// ...
+?>
+```
+
+### Валидация полей
+При отправке запроса сначала выполняется проверка полей на наличие ошибок. Если ошибки обнаружены, они отображаются пользователю. Запрос на сервер отправляется только при отсутствии ошибок валидации.
+```php
+// auth.php
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // ...
+    $phone = $_POST['phone'] ?? null;
+
+    $phoneError = "";
+
+    if (!preg_match('/^8\d{10}$/', $phone)) {
+        $phoneError = "Введите номер в формате 89123456789";
+    }
+
+    if (empty($phoneError) && empty($confirmPasswordError)) {
+        // Дальнейший код выполняется только при отсутствии ошибок
+    }
+    // ...
+}
+
+?>
+
+<div class="mb-3">
+    <label for="phone" class="form-label">Номер телефона</label>
+    <input type="text" class="form-control <?= !empty($phoneError) ? 'is-invalid' : '' ?>" id="phone" name="phone" placeholder="89998887766" value="<?= htmlspecialchars($phone ?? '') ?>" required>
+    <?php if (!empty($phoneError)): ?>
+        <div class="invalid-feedback"><?= htmlspecialchars($phoneError) ?></div>
+    <?php endif; ?>
+</div>
+```
+
+### Обработка исключений на сервере
+Запросы на сервере обернуты в блок `try-catch`, что позволяет безопасно обрабатывать исключения и предотвращать сбои в случае их возникновения.
+```php
+// UserController.php
+
+public function registerUser($user, $name, $birthday): void
+{
+    try {
+        // ...
+    } catch (Exception $error) {
+        $this->connection->rollBack();
+        throw $error;
+    }
+}
+```
