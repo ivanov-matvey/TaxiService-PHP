@@ -1,3 +1,7 @@
 FROM php:apache
 
-RUN docker-php-ext-install mysqli
+RUN apt-get update && \
+    apt-get install -y libzip-dev && \
+    docker-php-ext-install zip mysqli
+
+RUN docker-php-ext-enable zip

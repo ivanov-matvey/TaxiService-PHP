@@ -53,6 +53,9 @@ if ($role == "client") {
                 <li class="nav-item">
                     <a href="../orders/orders.php" role="button" class="nav-link active">Заказы</a>
                 </li>
+                <li class="nav-item">
+                    <a href="../reports/orders_driver_report.php" role="button" class="nav-link">Отчет 1</a>
+                </li>
             </ul>
             <ul class="nav nav-pills">
                 <li class="nav-item">

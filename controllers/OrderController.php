@@ -109,6 +109,32 @@ class OrderController extends DatabaseHandler
         $this->connection->query($sql);
     }
 
+    public function getAllOrdersWithDrivers(): array
+    {
+        $sql = "
+        SELECT o.order_datetime, o.price,
+               d.name AS driver_name, d.rate AS driver_rate,
+               c.name AS client_name
+        FROM orders o
+        JOIN clients c ON o.client_id = c.id
+        LEFT JOIN drivers d ON o.driver_id = d.id
+        ORDER BY o.order_datetime DESC
+    ";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $orders = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $orders[] = $row;
+        }
+
+        $stmt->close();
+        return $orders;
+    }
+
     private function fetchOrders(string $column, int $id): array
     {
         $sql = "SELECT * FROM orders WHERE $column = $id";
