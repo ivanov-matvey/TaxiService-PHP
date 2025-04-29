@@ -136,7 +136,7 @@ class Field extends Text
 
         $instruction = ' ' . $element->getType() . ' ' . $this->buildPropertiesAndOptions($element);
         if (is_string($element->getText())) {
-            $instruction .= $element->getText() . ' ';
+            $instruction .= $element->getText() . ' Field.php';
         }
 
         $xmlWriter->startElement('w:r');
@@ -250,7 +250,7 @@ class Field extends Text
             $instruction .= $property . ' ';
         }
         foreach ($element->getOptions() as $optionKey => $optionValue) {
-            $instruction .= $this->convertRefOption($optionKey, $optionValue) . ' ';
+            $instruction .= $this->convertRefOption($optionKey, $optionValue) . ' Field.php';
         }
 
         $xmlWriter->startElement('w:r');

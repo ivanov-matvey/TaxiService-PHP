@@ -11,6 +11,8 @@
         }
     ],
     "autoload": {
-        "classmap": ["pclzip.lib.php"]
+        "classmap": [
+          "pclzip.lib.php"
+        ]
     }
 }

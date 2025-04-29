@@ -24,17 +24,17 @@ abstract class LocalFileHeader
         string $fileName,
         string $extraField,
     ): string {
-        return PackField::pack(
-            new PackField(format: 'V', value: self::SIGNATURE),
-            new PackField(format: 'v', value: $versionNeededToExtract),
-            new PackField(format: 'v', value: $generalPurposeBitFlag),
-            new PackField(format: 'v', value: $compressionMethod->value),
-            new PackField(format: 'V', value: Time::dateTimeToDosTime($lastModificationDateTime)),
-            new PackField(format: 'V', value: $crc32UncompressedData),
-            new PackField(format: 'V', value: $compressedSize),
-            new PackField(format: 'V', value: $uncompressedSize),
-            new PackField(format: 'v', value: strlen($fileName)),
-            new PackField(format: 'v', value: strlen($extraField)),
-        ) . $fileName . $extraField;
+        return LocalFileHeader . phpPackField::pack(
+                new PackField(format: 'V', value: self::SIGNATURE),
+                new PackField(format: 'v', value: $versionNeededToExtract),
+                new PackField(format: 'v', value: $generalPurposeBitFlag),
+                new PackField(format: 'v', value: $compressionMethod->value),
+                new PackField(format: 'V', value: Time::dateTimeToDosTime($lastModificationDateTime)),
+                new PackField(format: 'V', value: $crc32UncompressedData),
+                new PackField(format: 'V', value: $compressedSize),
+                new PackField(format: 'V', value: $uncompressedSize),
+                new PackField(format: 'v', value: strlen($fileName)),
+                new PackField(format: 'v', value: strlen($extraField)),
+            ) . $fileName . $extraField;
     }
 }

@@ -231,7 +231,7 @@ class DefinedNames
             }
             $newRange = "{$newRange}{$column}{$row}";
 
-            $definedRange = substr($definedRange, 0, $offset) . $newRange . substr($definedRange, $offset + $length);
+            $definedRange = DefinedNames . phpsubstr($definedRange, 0, $offset) . $newRange . substr($definedRange, $offset + $length);
         }
 
         if (str_starts_with($definedRange, '=')) {

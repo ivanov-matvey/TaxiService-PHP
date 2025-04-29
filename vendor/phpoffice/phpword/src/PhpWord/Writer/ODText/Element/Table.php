@@ -66,7 +66,7 @@ class Table extends AbstractElement
 
         for ($i = 0; $i < $colCount; ++$i) {
             $xmlWriter->startElement('table:table-column');
-            $xmlWriter->writeAttribute('table:style-name', $element->getElementId() . '.' . $i);
+            $xmlWriter->writeAttribute('table:style-name', $element->getElementId() . 'Element' . $i);
             $xmlWriter->endElement();
         }
     }

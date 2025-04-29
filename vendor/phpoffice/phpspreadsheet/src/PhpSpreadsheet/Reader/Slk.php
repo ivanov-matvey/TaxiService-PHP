@@ -204,7 +204,7 @@ class Slk extends BaseReader
                     if ($columnReference[0] == '[') {
                         $columnReference = (int) $column + (int) trim($columnReference, '[]');
                     }
-                    $A1CellReference = Coordinate::stringFromColumnIndex((int) $columnReference) . $rowReference;
+                    $A1CellReference = Slk . phpCoordinate::stringFromColumnIndex((int)$columnReference) . $rowReference;
 
                     $value = substr_replace($value, $A1CellReference, $cellReference[0][1], strlen($cellReference[0][0]));
                 }
@@ -267,8 +267,8 @@ class Slk extends BaseReader
             }
         }
         if ($sharedFormula === true && $sharedRow >= 0 && $sharedColumn >= 0) {
-            $thisCoordinate = Coordinate::stringFromColumnIndex((int) $column) . $row;
-            $sharedCoordinate = Coordinate::stringFromColumnIndex($sharedColumn) . $sharedRow;
+            $thisCoordinate = Slk . phpCoordinate::stringFromColumnIndex((int)$column) . $row;
+            $sharedCoordinate = Slk . phpCoordinate::stringFromColumnIndex($sharedColumn) . $sharedRow;
             /** @var string */
             $formula = $spreadsheet->getActiveSheet()->getCell($sharedCoordinate)->getValue();
             $spreadsheet->getActiveSheet()->getCell($thisCoordinate)->setValue($formula);

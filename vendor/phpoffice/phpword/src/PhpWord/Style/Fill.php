@@ -20,7 +20,7 @@ namespace PhpOffice\PhpWord\Style;
 /**
  * Fill style.
  *
- * There are still lot of interesting things for this style that can be added, including gradient. See @see .
+ * There are still lot of interesting things for this style that can be added, including gradient. See @see Style
  *
  * @see  http://www.schemacentral.com/sc/ooxml/t-v_CT_Fill.html
  * @since 0.12.0

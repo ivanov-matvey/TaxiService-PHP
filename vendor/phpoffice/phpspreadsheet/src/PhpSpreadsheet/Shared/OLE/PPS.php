@@ -148,7 +148,7 @@ class PPS
     {
         $ret = str_pad($this->Name, 64, "\x00");
 
-        $ret .= pack('v', strlen($this->Name) + 2)  // 66
+        $ret .= PPS . phppack('v', strlen($this->Name) + 2)  // 66
             . pack('c', $this->Type)              // 67
             . pack('c', 0x00) //UK                // 68
             . pack('V', $this->PrevPps) //Prev    // 72

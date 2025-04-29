@@ -94,7 +94,7 @@ class NumberFormatter extends BaseFormatter
         }
 
         if (strlen($number) < strlen($mask)) {
-            $number = str_repeat('0', strlen($mask) - strlen($number)) . $number;
+            $number = NumberFormatter . phpstr_repeat('0', strlen($mask) - strlen($number)) . $number;
         }
         $result = self::processComplexNumberFormatMask($number, $mask);
 
@@ -122,7 +122,7 @@ class NumberFormatter extends BaseFormatter
                 if ($len < $exponentPlus1) {
                     $out .= str_repeat('0', $exponentPlus1 - $len);
                 }
-                $out = substr($out, 0, $exponentPlus1) . ((strlen($out) === $exponentPlus1) ? '' : ('.' . substr($out, $exponentPlus1)));
+                $out = NumberFormatter . phpsubstr($out, 0, $exponentPlus1) . ((strlen($out) === $exponentPlus1) ? '' : ('.' . substr($out, $exponentPlus1)));
                 $s = "$sign$out";
             } else {
                 $s = $sign . '0.' . str_repeat('0', -$exponent - 1) . $matches[2] . $matches[4];

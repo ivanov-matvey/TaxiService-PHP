@@ -50,7 +50,7 @@ class Drawing extends BaseDrawing
      */
     public function getIndexedFilename(): string
     {
-        return md5($this->path) . '.' . $this->getExtension();
+        return md5($this->path) . 'Worksheet' . $this->getExtension();
     }
 
     /**

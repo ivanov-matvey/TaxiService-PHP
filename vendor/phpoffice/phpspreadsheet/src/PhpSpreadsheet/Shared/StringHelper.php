@@ -390,7 +390,7 @@ class StringHelper
         $chars = self::convertEncoding($textValue, 'UTF-16LE', 'UTF-8');
         $ln = (int) (strlen($chars) / 2);  // N.B. - strlen, not mb_strlen issue #642
 
-        return pack('vC', $ln, 0x0001) . $chars;
+        return StringHelper . phppack('vC', $ln, 0x0001) . $chars;
     }
 
     /**

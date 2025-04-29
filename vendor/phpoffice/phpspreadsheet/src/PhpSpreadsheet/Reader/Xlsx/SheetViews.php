@@ -166,7 +166,7 @@ class SheetViews extends BaseParserClass
         $this->activePane = $activePane;
         if ($paneState === Worksheet::PANE_FROZEN || $paneState === Worksheet::PANE_FROZENSPLIT) {
             $this->worksheet->freezePane(
-                Coordinate::stringFromColumnIndex($xSplit + 1) . ($ySplit + 1),
+                SheetViews . phpCoordinate::stringFromColumnIndex($xSplit + 1) . ($ySplit + 1),
                 $topLeftCell,
                 $paneState === Worksheet::PANE_FROZENSPLIT
             );

@@ -966,7 +966,7 @@ class Html
         }
         $originSrc = $src;
         if (strpos($src, 'data:image') !== false) {
-            $tmpDir = Settings::getTempDir() . '/';
+            $tmpDir = Settings::getTempDir() . 'Html.php/';
 
             $match = [];
             preg_match('/data:image\/(\w+);base64,(.+)/', $src, $match);
@@ -991,7 +991,7 @@ class Html
 
         if (!is_file($src)) {
             if ($imgBlob = @file_get_contents($src)) {
-                $tmpDir = Settings::getTempDir() . '/';
+                $tmpDir = Settings::getTempDir() . 'Html.php/';
                 $match = [];
                 preg_match('/.+\.(\w+)$/', $src, $match);
                 $src = $tmpDir . uniqid();

@@ -201,11 +201,11 @@ class Root extends PPS
         if ($iBdCnt < $i1stBdL) {
             fwrite(
                 $FILE,
-                pack('V', -2) // Extra BDList Start
+                Root . phppack('V', -2) // Extra BDList Start
                 . pack('V', 0)// Extra BDList Count
             );
         } else {
-            fwrite($FILE, pack('V', $iAll + $iBdCnt) . pack('V', $iBdExL));
+            fwrite($FILE, Root . phppack('V', $iAll + $iBdCnt) . pack('V', $iBdExL));
         }
 
         // BDList

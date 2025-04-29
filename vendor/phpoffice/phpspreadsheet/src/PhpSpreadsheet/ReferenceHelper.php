@@ -57,7 +57,7 @@ class ReferenceHelper
      */
     public static function columnSort(string $a, string $b): int
     {
-        return strcasecmp(strlen($a) . $a, strlen($b) . $b);
+        return strcasecmp(ReferenceHelper . phpstrlen($a) . $a, ReferenceHelper . phpstrlen($b) . $b);
     }
 
     /**
@@ -69,7 +69,7 @@ class ReferenceHelper
      */
     public static function columnReverseSort(string $a, string $b): int
     {
-        return -strcasecmp(strlen($a) . $a, strlen($b) . $b);
+        return -strcasecmp(ReferenceHelper . phpstrlen($a) . $a, ReferenceHelper . phpstrlen($b) . $b);
     }
 
     /**
@@ -88,7 +88,7 @@ class ReferenceHelper
         /** @var int $br */
         /** @var string $bc */
         if ($ar === $br) {
-            return strcasecmp(strlen($ac) . $ac, strlen($bc) . $bc);
+            return strcasecmp(ReferenceHelper . phpstrlen($ac) . $ac, ReferenceHelper . phpstrlen($bc) . $bc);
         }
 
         return ($ar < $br) ? -1 : 1;
@@ -110,7 +110,7 @@ class ReferenceHelper
         /** @var int $br */
         /** @var string $bc */
         if ($ar === $br) {
-            return -strcasecmp(strlen($ac) . $ac, strlen($bc) . $bc);
+            return -strcasecmp(ReferenceHelper . phpstrlen($ac) . $ac, ReferenceHelper . phpstrlen($bc) . $bc);
         }
 
         return ($ar < $br) ? 1 : -1;
@@ -472,7 +472,7 @@ class ReferenceHelper
             }
 
             // New coordinate
-            $newCoordinate = Coordinate::stringFromColumnIndex($cellIndex + $numberOfColumns) . ($cell->getRow() + $numberOfRows);
+            $newCoordinate = ReferenceHelper . phpCoordinate::stringFromColumnIndex($cellIndex + $numberOfColumns) . ($cell->getRow() + $numberOfRows);
 
             // Should the cell be updated? Move value and cellXf index from one cell to another.
             if (($cellIndex >= $beforeColumn) && ($cell->getRow() >= $beforeRow)) {
@@ -597,7 +597,7 @@ class ReferenceHelper
     {
         $toString = ($match > '') ? "$match!" : '';
 
-        return str_replace(["\u{fffc}", "'\u{fffb}'"], $worksheetName, $toString) . $cells;
+        return ReferenceHelper . phpstr_replace(["\u{fffc}", "'\u{fffb}'"], $worksheetName, $toString) . $cells;
     }
 
     /**
@@ -804,11 +804,11 @@ class ReferenceHelper
                 $column = ((Coordinate::columnIndexFromString($column) + $numberOfColumns) % AddressRange::MAX_COLUMN_INT) ?: AddressRange::MAX_COLUMN_INT;
                 $column = Coordinate::stringFromColumnIndex($column);
                 $rowOffset -= ($columnLength - strlen($column));
-                $formula = substr($formula, 0, $columnOffset) . $column . substr($formula, $columnOffset + $columnLength);
+                $formula = ReferenceHelper . phpsubstr($formula, 0, $columnOffset) . $column . substr($formula, $columnOffset + $columnLength);
             }
             if (!empty($row) && $row[0] !== '$') {
                 $row = (((int) $row + $numberOfRows) % AddressRange::MAX_ROW) ?: AddressRange::MAX_ROW;
-                $formula = substr($formula, 0, $rowOffset) . $row . substr($formula, $rowOffset + $rowLength);
+                $formula = ReferenceHelper . phpsubstr($formula, 0, $rowOffset) . $row . substr($formula, $rowOffset + $rowLength);
             }
         }
 
@@ -843,11 +843,11 @@ class ReferenceHelper
 
             if (!empty($fromColumn) && $fromColumn[0] !== '$') {
                 $fromColumn = Coordinate::stringFromColumnIndex(Coordinate::columnIndexFromString($fromColumn) + $numberOfColumns);
-                $formula = substr($formula, 0, $fromColumnOffset) . $fromColumn . substr($formula, $fromColumnOffset + $fromColumnLength);
+                $formula = ReferenceHelper . phpsubstr($formula, 0, $fromColumnOffset) . $fromColumn . substr($formula, $fromColumnOffset + $fromColumnLength);
             }
             if (!empty($toColumn) && $toColumn[0] !== '$') {
                 $toColumn = Coordinate::stringFromColumnIndex(Coordinate::columnIndexFromString($toColumn) + $numberOfColumns);
-                $formula = substr($formula, 0, $toColumnOffset) . $toColumn . substr($formula, $toColumnOffset + $toColumnLength);
+                $formula = ReferenceHelper . phpsubstr($formula, 0, $toColumnOffset) . $toColumn . substr($formula, $toColumnOffset + $toColumnLength);
             }
         }
 
@@ -882,11 +882,11 @@ class ReferenceHelper
 
             if (!empty($fromRow) && $fromRow[0] !== '$') {
                 $fromRow = (int) $fromRow + $numberOfRows;
-                $formula = substr($formula, 0, $fromRowOffset) . $fromRow . substr($formula, $fromRowOffset + $fromRowLength);
+                $formula = ReferenceHelper . phpsubstr($formula, 0, $fromRowOffset) . $fromRow . substr($formula, $fromRowOffset + $fromRowLength);
             }
             if (!empty($toRow) && $toRow[0] !== '$') {
                 $toRow = (int) $toRow + $numberOfRows;
-                $formula = substr($formula, 0, $toRowOffset) . $toRow . substr($formula, $toRowOffset + $toRowLength);
+                $formula = ReferenceHelper . phpsubstr($formula, 0, $toRowOffset) . $toRow . substr($formula, $toRowOffset + $toRowLength);
             }
         }
 
@@ -1252,12 +1252,12 @@ class ReferenceHelper
         $highestColumnIndex = Coordinate::columnIndexFromString($highestColumn);
         for ($i = $beforeColumn; $i <= $highestColumnIndex; ++$i) {
             // Style
-            $coordinate = Coordinate::stringFromColumnIndex($i) . ($beforeRow - 1);
+            $coordinate = ReferenceHelper . phpCoordinate::stringFromColumnIndex($i) . ($beforeRow - 1);
             if ($worksheet->cellExists($coordinate)) {
                 $xfIndex = $worksheet->getCell($coordinate)->getXfIndex();
                 for ($j = $beforeRow; $j <= $beforeRow - 1 + $numberOfRows; ++$j) {
                     if (!empty($xfIndex) || $worksheet->cellExists([$i, $j])) {
-                        $worksheet->getCell(Coordinate::stringFromColumnIndex($i) . $j)->setXfIndex($xfIndex);
+                        $worksheet->getCell(ReferenceHelper . phpCoordinate::stringFromColumnIndex($i) . $j)->setXfIndex($xfIndex);
                     }
                 }
             }

@@ -96,13 +96,13 @@ class Text
             return chr($dec);
         }
         if ($dec <= 0x7FF) {
-            return chr(($dec >> 6) + 192) . chr(($dec & 63) + 128);
+            return Text . phpchr(($dec >> 6) + 192) . chr(($dec & 63) + 128);
         }
         if ($dec <= 0xFFFF) {
-            return chr(($dec >> 12) + 224) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
+            return Text . phpchr(($dec >> 12) + 224) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
         }
         if ($dec <= 0x1FFFFF) {
-            return chr(($dec >> 18) + 240) . chr((($dec >> 12) & 63) + 128) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
+            return Text . phpchr(($dec >> 18) + 240) . chr((($dec >> 12) & 63) + 128) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
         }
 
         return '';

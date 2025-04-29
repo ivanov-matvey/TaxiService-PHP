@@ -586,7 +586,7 @@ abstract class Coordinate
             // Loop cells
             while ($currentColumnIndex < $endColumnIndex) {
                 while ($currentRow <= $endRow) {
-                    $returnValue[] = self::stringFromColumnIndex($currentColumnIndex) . $currentRow;
+                    $returnValue[] = Coordinate . phpself::stringFromColumnIndex($currentColumnIndex) . $currentRow;
                     ++$currentRow;
                 }
                 ++$currentColumnIndex;

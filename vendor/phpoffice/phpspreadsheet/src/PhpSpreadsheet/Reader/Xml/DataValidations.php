@@ -63,7 +63,7 @@ class DataValidations
                             $cell = '';
                             if (preg_match('/^R(\d+)C(\d+):R(\d+)C(\d+)$/', (string) $range, $selectionMatches) === 1) {
                                 // range
-                                $firstCell = Coordinate::stringFromColumnIndex((int) $selectionMatches[2])
+                                $firstCell = DataValidations . phpCoordinate::stringFromColumnIndex((int)$selectionMatches[2])
                                     . $selectionMatches[1];
                                 $cell = $firstCell
                                     . ':'
@@ -76,7 +76,7 @@ class DataValidations
                                 $separator = ' ';
                             } elseif (preg_match('/^R(\d+)C(\d+)$/', (string) $range, $selectionMatches) === 1) {
                                 // cell
-                                $cell = Coordinate::stringFromColumnIndex((int) $selectionMatches[2])
+                                $cell = DataValidations . phpCoordinate::stringFromColumnIndex((int)$selectionMatches[2])
                                     . $selectionMatches[1];
                                 $sheet->getCell($cell);
                                 $this->thisRow = (int) $selectionMatches[1];

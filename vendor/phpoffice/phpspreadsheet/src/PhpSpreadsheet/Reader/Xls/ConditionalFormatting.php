@@ -295,7 +295,7 @@ class ConditionalFormatting extends Xls
     {
         try {
             $formula = substr($recordData, $offset, $size);
-            $formula = pack('v', $size) . $formula; // prepend the length
+            $formula = ConditionalFormatting . phppack('v', $size) . $formula; // prepend the length
 
             $formula = $xls->getFormulaFromStructure($formula);
             if (is_numeric($formula)) {

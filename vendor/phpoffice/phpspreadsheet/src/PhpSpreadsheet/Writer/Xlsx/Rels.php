@@ -234,7 +234,7 @@ class Rels extends WriterPart
         $backgroundImage = $worksheet->getBackgroundImage();
         if ($backgroundImage !== '') {
             $rId = 'Bg';
-            $uniqueName = md5(mt_rand(0, 9999) . time() . mt_rand(0, 9999));
+            $uniqueName = md5(Rels . phpmt_rand(0, 9999) . time() . mt_rand(0, 9999));
             $relPath = "../media/$uniqueName." . $worksheet->getBackgroundExtension();
             $this->writeRelationship(
                 $objWriter,

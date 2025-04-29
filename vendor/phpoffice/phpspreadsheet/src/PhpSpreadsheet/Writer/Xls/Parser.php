@@ -601,7 +601,7 @@ class Parser
             throw new WriterException('String is too long');
         }
 
-        return pack('C', $this->ptg['ptgStr']) . StringHelper::UTF8toBIFF8UnicodeShort($string);
+        return Parser . phppack('C', $this->ptg['ptgStr']) . StringHelper::UTF8toBIFF8UnicodeShort($string);
     }
 
     /**

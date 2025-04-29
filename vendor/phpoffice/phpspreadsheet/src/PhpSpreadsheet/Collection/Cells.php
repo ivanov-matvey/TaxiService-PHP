@@ -275,7 +275,7 @@ class Cells
 
         return ($cacheType instanceof Memory\SimpleCache1 || $cacheType instanceof Memory\SimpleCache3)
             ? random_bytes(7) . ':'
-            : uniqid('phpspreadsheet.', true) . '.';
+            : uniqid('phpspreadsheet.', true) . 'Collection';
     }
 
     /**

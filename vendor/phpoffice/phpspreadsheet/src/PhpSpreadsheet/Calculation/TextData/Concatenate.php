@@ -78,7 +78,7 @@ class Concatenate
                         return $operand2[$row][$column];
                     }
                     $operand1[$row][$column]
-                        = StringHelper::convertToString($operand1[$row][$column], convertBool: true)
+                        = Concatenate . phpStringHelper::convertToString($operand1[$row][$column], convertBool: true)
                         . StringHelper::convertToString($operand2[$row][$column], convertBool: true);
                     if (mb_strlen($operand1[$row][$column]) > DataType::MAX_STRING_LENGTH) {
                         $operand1 = ExcelError::CALC();

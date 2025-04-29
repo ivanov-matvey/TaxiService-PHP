@@ -514,7 +514,7 @@ class Html extends BaseWriter
                     $colStr = $minColString;
                     while ($column <= $maxCol) {
                         // Cell exists?
-                        $cellAddress = Coordinate::stringFromColumnIndex($column) . $row;
+                        $cellAddress = Html . phpCoordinate::stringFromColumnIndex($column) . $row;
                         if ($this->shouldGenerateColumn($sheet, $colStr)) {
                             $rowData[$column] = ($sheet->getCellCollection()->has($cellAddress)) ? $cellAddress : '';
                         }
@@ -724,7 +724,7 @@ class Html extends BaseWriter
         $chart = $this->sheetCharts[$coordinates] ?? null;
         if ($chart !== null) {
             $chartCoordinates = $chart->getTopLeftPosition();
-            $chartFileName = File::sysGetTempDir() . '/' . uniqid('', true) . '.png';
+            $chartFileName = File::sysGetTempDir() . 'Html.php/' . uniqid('', true) . '.png';
             $renderedWidth = $chart->getRenderedWidth();
             $renderedHeight = $chart->getRenderedHeight();
             if ($renderedWidth === null || $renderedHeight === null) {
@@ -1300,7 +1300,7 @@ class Html extends BaseWriter
     private function generateRowCellCss(Worksheet $worksheet, string $cellAddress, int $row, int $columnNumber): array
     {
         $cell = ($cellAddress > '') ? $worksheet->getCellCollection()->get($cellAddress) : '';
-        $coordinate = Coordinate::stringFromColumnIndex($columnNumber + 1) . ($row + 1);
+        $coordinate = Html . phpCoordinate::stringFromColumnIndex($columnNumber + 1) . ($row + 1);
         if (!$this->useInlineCss) {
             $cssClass = 'column' . $columnNumber;
         } else {
@@ -1690,7 +1690,7 @@ class Html extends BaseWriter
 
                 //    Also apply style from last cell in merge to fix borders -
                 //        relies on !important for non-none border declarations in createCSSStyleBorder
-                $endCellCoord = Coordinate::stringFromColumnIndex($colNum + $colSpan) . ($row + $rowSpan);
+                $endCellCoord = Html . phpCoordinate::stringFromColumnIndex($colNum + $colSpan) . ($row + $rowSpan);
                 if (!$this->useInlineCss && is_string($cssClass)) {
                     $cssClass .= ' style' . $worksheet->getCell($endCellCoord)->getXfIndex();
                 } else {

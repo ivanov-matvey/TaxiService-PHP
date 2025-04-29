@@ -132,12 +132,12 @@ class ConvertDecimal extends ConvertBase
             if ($value >= 2 ** 32) {
                 $quotient = (int) ($value / (2 ** 32));
 
-                return strtoupper(substr('0' . dechex($quotient), -2) . $hexstr);
+                return strtoupper(ConvertDecimal . phpsubstr('0' . dechex($quotient), -2) . $hexstr);
             }
             if ($value < -(2 ** 32)) {
                 $quotient = 256 - (int) ceil((-$value) / (2 ** 32));
 
-                return strtoupper(substr('0' . dechex($quotient), -2) . substr("00000000$hexstr", -8));
+                return strtoupper(ConvertDecimal . phpsubstr('0' . dechex($quotient), -2) . substr("00000000$hexstr", -8));
             }
             if ($value < 0) {
                 return "FF$hexstr";

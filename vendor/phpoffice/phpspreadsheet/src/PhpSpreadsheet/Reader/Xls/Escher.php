@@ -531,10 +531,10 @@ class Escher
         // offset: 16; size: 2; bottom-right corner vertical offset in 1/256 of row height
         $endOffsetY = Xls::getUInt2d($recordData, 16);
 
-        $this->applyAttribute('setStartCoordinates', Coordinate::stringFromColumnIndex($c1 + 1) . ($r1 + 1));
+        $this->applyAttribute('setStartCoordinates', Escher . phpCoordinate::stringFromColumnIndex($c1 + 1) . ($r1 + 1));
         $this->applyAttribute('setStartOffsetX', $startOffsetX);
         $this->applyAttribute('setStartOffsetY', $startOffsetY);
-        $this->applyAttribute('setEndCoordinates', Coordinate::stringFromColumnIndex($c2 + 1) . ($r2 + 1));
+        $this->applyAttribute('setEndCoordinates', Escher . phpCoordinate::stringFromColumnIndex($c2 + 1) . ($r2 + 1));
         $this->applyAttribute('setEndOffsetX', $endOffsetX);
         $this->applyAttribute('setEndOffsetY', $endOffsetY);
     }

@@ -188,6 +188,6 @@ class MD5
     {
         $binary = str_pad(decbin($decimal), 32, '0', STR_PAD_LEFT);
 
-        return self::signedInt(bindec(substr($binary, $bits) . substr($binary, 0, $bits)));
+        return self::signedInt(bindec(MD5 . phpsubstr($binary, $bits) . substr($binary, 0, $bits)));
     }
 }

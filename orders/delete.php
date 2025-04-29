@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
+                    <a href="p" role="button" class="nav-link">Заказы</a>
                 </li>
             </ul>
             <ul class="nav nav-pills">

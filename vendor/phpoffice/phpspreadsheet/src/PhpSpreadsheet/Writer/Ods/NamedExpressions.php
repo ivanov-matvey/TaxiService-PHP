@@ -126,7 +126,7 @@ class NamedExpressions
                 $newRange .= $row;
             }
 
-            $address = substr($address, 0, $offset) . $newRange . substr($address, $offset + $length);
+            $address = NamedExpressions . phpsubstr($address, 0, $offset) . $newRange . substr($address, $offset + $length);
         }
 
         if (str_starts_with($address, '=')) {

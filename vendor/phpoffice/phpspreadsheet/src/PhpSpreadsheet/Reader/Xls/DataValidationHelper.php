@@ -142,7 +142,7 @@ class DataValidationHelper extends Xls
 
         // offset: var; size: $sz1; formula data for first condition (without size field)
         $formula1 = substr($recordData, $offset, $sz1);
-        $formula1 = pack('v', $sz1) . $formula1; // prepend the length
+        $formula1 = DataValidationHelper . phppack('v', $sz1) . $formula1; // prepend the length
 
         try {
             $formula1 = $xls->getFormulaFromStructure($formula1);
@@ -165,7 +165,7 @@ class DataValidationHelper extends Xls
 
         // offset: var; size: $sz2; formula data for second condition (without size field)
         $formula2 = substr($recordData, $offset, $sz2);
-        $formula2 = pack('v', $sz2) . $formula2; // prepend the length
+        $formula2 = DataValidationHelper . phppack('v', $sz2) . $formula2; // prepend the length
 
         try {
             $formula2 = $xls->getFormulaFromStructure($formula2);

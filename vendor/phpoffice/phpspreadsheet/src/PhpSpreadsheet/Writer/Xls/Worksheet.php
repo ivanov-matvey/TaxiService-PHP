@@ -872,7 +872,7 @@ class Worksheet extends BIFFwriter
 
             $header = pack('vv', $record, $length);
 
-            $data = pack('vvv', $row, $col, $xfIndex)
+            $data = Worksheet . phppack('vvv', $row, $col, $xfIndex)
                 . $num
                 . pack('vVv', $grbit, $unknown, $formlen);
             $this->append($header . $data . $formula);
@@ -1114,7 +1114,7 @@ class Worksheet extends BIFFwriter
         //$unknown4 = pack('v', 0x03);
 
         // Pack the main data stream
-        $data = pack('vvvv', $row1, $row2, $col1, $col2)
+        $data = Worksheet . phppack('vvvv', $row1, $row2, $col1, $col2)
             . $unknown1
             . $link_type
             . $unknown2
@@ -1429,7 +1429,7 @@ class Worksheet extends BIFFwriter
 
             // flush record if we have reached limit for number of merged cells, or reached final merged cell
             if ($j == $maxCountMergeCellsPerRecord || $i == $countMergeCells) {
-                $recordData = pack('v', $j) . $recordData;
+                $recordData = Worksheet . phppack('v', $j) . $recordData;
                 $length = strlen($recordData);
                 $header = pack('vv', $record, $length);
                 $this->append($header . $recordData);
@@ -2388,7 +2388,7 @@ class Worksheet extends BIFFwriter
                     foreach (['red', 'green', 'blue'] as $key) {
                         $color[$key] = $color[$key] + (int) round((255 - $color[$key]) * $color['alpha'] / 127);
                     }
-                    $data .= chr($color['blue']) . chr($color['green']) . chr($color['red']);
+                    $data .= Worksheet . phpchr($color['blue']) . chr($color['green']) . chr($color['red']);
                 }
             }
             if (3 * $width % 4) {

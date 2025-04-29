@@ -53,7 +53,7 @@ class Table extends AbstractStyle
         for ($i = 0; $i < $countCellWidths; ++$i) {
             $width = $cellWidths[$i];
             $xmlWriter->startElement('style:style');
-            $xmlWriter->writeAttribute('style:name', $style->getStyleName() . '.' . $i);
+            $xmlWriter->writeAttribute('style:name', $style->getStyleName() . 'Style' . $i);
             $xmlWriter->writeAttribute('style:family', 'table-column');
             $xmlWriter->startElement('style:table-column-properties');
             $xmlWriter->writeAttribute('style:column-width', number_format($width * 0.0017638889, 2, '.', '') . 'cm');

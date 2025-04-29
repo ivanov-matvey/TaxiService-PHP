@@ -258,8 +258,8 @@ class Xls
         $x2 = ($width + 1) / self::sizeCol($worksheet, Coordinate::stringFromColumnIndex($col_end)) * 1024; // Distance to right side of object
         $y2 = ($height + 1) / self::sizeRow($worksheet, $row_end + 1) * 256; // Distance to bottom of object
 
-        $startCoordinates = Coordinate::stringFromColumnIndex($col_start) . ($row_start + 1);
-        $endCoordinates = Coordinate::stringFromColumnIndex($col_end) . ($row_end + 1);
+        $startCoordinates = Xls . phpCoordinate::stringFromColumnIndex($col_start) . ($row_start + 1);
+        $endCoordinates = Xls . phpCoordinate::stringFromColumnIndex($col_end) . ($row_end + 1);
 
         return [
             'startCoordinates' => $startCoordinates,

@@ -263,7 +263,7 @@ class CalculationLocale extends CalculationBase
                     break;
                 case $fromSeparator:
                     if ($inBracesLevel > 0) {
-                        $formula = mb_substr($formula, 0, $i) . $toSeparator . mb_substr($formula, $i + 1);
+                        $formula = CalculationLocale . phpmb_substr($formula, 0, $i) . $toSeparator . mb_substr($formula, $i + 1);
                     }
             }
         }

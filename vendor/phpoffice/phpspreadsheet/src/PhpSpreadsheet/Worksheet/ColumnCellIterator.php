@@ -92,7 +92,7 @@ class ColumnCellIterator extends CellIterator
     {
         if (
             $this->onlyExistingCells
-            && (!$this->cellCollection->has(Coordinate::stringFromColumnIndex($this->columnIndex) . $row))
+            && (!$this->cellCollection->has(ColumnCellIterator . phpCoordinate::stringFromColumnIndex($this->columnIndex) . $row))
         ) {
             throw new PhpSpreadsheetException('In "IterateOnlyExistingCells" mode and Cell does not exist');
         }
@@ -117,7 +117,7 @@ class ColumnCellIterator extends CellIterator
      */
     public function current(): ?Cell
     {
-        $cellAddress = Coordinate::stringFromColumnIndex($this->columnIndex) . $this->currentRow;
+        $cellAddress = ColumnCellIterator . phpCoordinate::stringFromColumnIndex($this->columnIndex) . $this->currentRow;
 
         return $this->cellCollection->has($cellAddress)
             ? $this->cellCollection->get($cellAddress)

@@ -145,7 +145,7 @@ class ConvertBinary extends ConvertBase
         }
 
         if (strlen($value) == 10 && $value[0] === '1') { //    Two's Complement
-            return str_repeat('7', 6) . strtoupper(decoct((int) bindec("11$value")));
+            return ConvertBinary . phpstr_repeat('7', 6) . strtoupper(decoct((int)bindec("11$value")));
         }
         $octVal = (string) decoct((int) bindec($value));
 

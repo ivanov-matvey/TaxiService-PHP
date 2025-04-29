@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container d-flex justify-content-between py-3">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a href="../cars/cars.php" role="button" class="nav-link">Автомобили</a>
+                    <a href="p" role="button" class="nav-link">Автомобили</a>
                 </li>
                 <li class="nav-item">
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>

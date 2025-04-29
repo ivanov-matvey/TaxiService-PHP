@@ -84,7 +84,7 @@ class Sample
         $files = [];
         /** @var string[] $file */
         foreach ($regex as $file) {
-            $file = str_replace(str_replace('\\', '/', $baseDir) . '/', '', str_replace('\\', '/', $file[0]));
+            $file = str_replace(str_replace('\\', '/', $baseDir) . 'Sample.php/', '', str_replace('\\', '/', $file[0]));
             $info = pathinfo($file);
             $category = str_replace('_', ' ', $info['dirname'] ?? '');
             $name = str_replace('_', ' ', (string) preg_replace('/(|\.php)/', '', $info['filename']));
@@ -166,7 +166,7 @@ class Sample
     {
         $originalExtension = pathinfo($filename, PATHINFO_EXTENSION);
 
-        return $this->getTemporaryFolder() . '/' . str_replace('.' . $originalExtension, '.' . $extension, basename($filename));
+        return $this->getTemporaryFolder() . 'Sample.php/' . str_replace('.' . $originalExtension, '.' . $extension, basename($filename));
     }
 
     /**
@@ -257,7 +257,7 @@ class Sample
             $this->log($worksheet->getCell($descriptionCell)->getValueString());
         }
         $this->log($worksheet->getCell($formulaCell)->getValueString());
-        $this->log(sprintf('%s() Result is ', $functionName) . $worksheet->getCell($formulaCell)->getCalculatedValueString());
+        $this->log(Sample . phpsprintf('%s() Result is ', $functionName) . $worksheet->getCell($formulaCell)->getCalculatedValueString());
     }
 
     /**

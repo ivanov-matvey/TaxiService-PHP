@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="../account/account.php" class="btn btn-outline-primary">Аккаунт</a>
                 </li>
                 <li class="nav-item ms-2">
-                    <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>
+                    <a href="php" class="btn btn-outline-danger">Выйти</a>
                 </li>
             </ul>
         </div>

@@ -68,7 +68,7 @@
         "ext-dom": "*",
         "ext-json": "*",
         "ext-xml": "*",
-        "phpoffice/math": "^0.2"
+        "../math": "^0.2"
     },
     "require-dev": {
         "ext-zip": "*",

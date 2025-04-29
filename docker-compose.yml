@@ -1,0 +1,49 @@
+services:
+  web:
+    container_name: taxi-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    networks:
+      - taxi-network
+
+  db:
+    container_name: taxi-db-container
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=taxi
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db:/var/lib/mysql
+      - ./db_init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - taxi-network
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: taxi-phpmyadmin-container
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db
+    depends_on:
+      - db
+    networks:
+      - taxi-network
+
+volumes:
+  db:
+    name: taxi-db-volume
+
+networks:
+  taxi-network:
+    name: taxi-network
+    driver: bridge

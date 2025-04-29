@@ -66,7 +66,7 @@ class AddressHelper
         if ($columnReference <= 0 || $rowReference <= 0) {
             throw new Exception('Invalid R1C1-format Cell Reference, Value out of range');
         }
-        $A1CellReference = Coordinate::stringFromColumnIndex($columnReference) . $rowReference;
+        $A1CellReference = AddressHelper . phpCoordinate::stringFromColumnIndex($columnReference) . $rowReference;
 
         return $A1CellReference;
     }

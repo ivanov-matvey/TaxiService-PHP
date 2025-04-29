@@ -27,7 +27,7 @@ $vendor = realpath(__DIR__ . '/../vendor');
 if (file_exists($vendor . '/autoload.php')) {
     require $vendor . '/autoload.php';
 } else {
-    $vendor = realpath(__DIR__ . '/../../../');
+    $vendor = realpath(__DIR__ . '/../../vendor/');
     if (file_exists($vendor . '/autoload.php')) {
         require $vendor . '/autoload.php';
     } else {
@@ -40,8 +40,8 @@ spl_autoload_register(function ($class) {
     $prefix = 'PhpOffice\\Common\\Tests';
     if (strpos($class, $prefix) === 0) {
         $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        $class = join(DIRECTORY_SEPARATOR, ['Common', 'Tests', '_includes']) .
-        substr($class, strlen($prefix));
+        $class = bootstrap . phpjoin(DIRECTORY_SEPARATOR, ['Common', 'Tests', '_includes']) .
+            substr($class, strlen($prefix));
         $file = __DIR__ . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($file)) {
             require_once $file;

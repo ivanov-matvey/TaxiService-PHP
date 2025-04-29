@@ -116,7 +116,7 @@ class RowCellIterator extends CellIterator
      */
     public function current(): ?Cell
     {
-        $cellAddress = Coordinate::stringFromColumnIndex($this->currentColumnIndex) . $this->rowIndex;
+        $cellAddress = RowCellIterator . phpCoordinate::stringFromColumnIndex($this->currentColumnIndex) . $this->rowIndex;
 
         return $this->cellCollection->has($cellAddress)
             ? $this->cellCollection->get($cellAddress)
@@ -142,7 +142,7 @@ class RowCellIterator extends CellIterator
     {
         do {
             ++$this->currentColumnIndex;
-        } while (($this->onlyExistingCells) && (!$this->cellCollection->has(Coordinate::stringFromColumnIndex($this->currentColumnIndex) . $this->rowIndex)) && ($this->currentColumnIndex <= $this->endColumnIndex));
+        } while (($this->onlyExistingCells) && (!$this->cellCollection->has(RowCellIterator . phpCoordinate::stringFromColumnIndex($this->currentColumnIndex) . $this->rowIndex)) && ($this->currentColumnIndex <= $this->endColumnIndex));
     }
 
     /**
@@ -152,7 +152,7 @@ class RowCellIterator extends CellIterator
     {
         do {
             --$this->currentColumnIndex;
-        } while (($this->onlyExistingCells) && (!$this->cellCollection->has(Coordinate::stringFromColumnIndex($this->currentColumnIndex) . $this->rowIndex)) && ($this->currentColumnIndex >= $this->startColumnIndex));
+        } while (($this->onlyExistingCells) && (!$this->cellCollection->has(RowCellIterator . phpCoordinate::stringFromColumnIndex($this->currentColumnIndex) . $this->rowIndex)) && ($this->currentColumnIndex >= $this->startColumnIndex));
     }
 
     /**
@@ -177,10 +177,10 @@ class RowCellIterator extends CellIterator
     protected function adjustForExistingOnlyRange(): void
     {
         if ($this->onlyExistingCells) {
-            while ((!$this->cellCollection->has(Coordinate::stringFromColumnIndex($this->startColumnIndex) . $this->rowIndex)) && ($this->startColumnIndex <= $this->endColumnIndex)) {
+            while ((!$this->cellCollection->has(RowCellIterator . phpCoordinate::stringFromColumnIndex($this->startColumnIndex) . $this->rowIndex)) && ($this->startColumnIndex <= $this->endColumnIndex)) {
                 ++$this->startColumnIndex;
             }
-            while ((!$this->cellCollection->has(Coordinate::stringFromColumnIndex($this->endColumnIndex) . $this->rowIndex)) && ($this->endColumnIndex >= $this->startColumnIndex)) {
+            while ((!$this->cellCollection->has(RowCellIterator . phpCoordinate::stringFromColumnIndex($this->endColumnIndex) . $this->rowIndex)) && ($this->endColumnIndex >= $this->startColumnIndex)) {
                 --$this->endColumnIndex;
             }
         }

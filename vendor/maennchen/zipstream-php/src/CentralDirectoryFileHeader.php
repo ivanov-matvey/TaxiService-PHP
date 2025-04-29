@@ -30,23 +30,23 @@ abstract class CentralDirectoryFileHeader
         int $externalFileAttributes,
         int $relativeOffsetOfLocalHeader,
     ): string {
-        return PackField::pack(
-            new PackField(format: 'V', value: self::SIGNATURE),
-            new PackField(format: 'v', value: $versionMadeBy),
-            new PackField(format: 'v', value: $versionNeededToExtract),
-            new PackField(format: 'v', value: $generalPurposeBitFlag),
-            new PackField(format: 'v', value: $compressionMethod->value),
-            new PackField(format: 'V', value: Time::dateTimeToDosTime($lastModificationDateTime)),
-            new PackField(format: 'V', value: $crc32),
-            new PackField(format: 'V', value: $compressedSize),
-            new PackField(format: 'V', value: $uncompressedSize),
-            new PackField(format: 'v', value: strlen($fileName)),
-            new PackField(format: 'v', value: strlen($extraField)),
-            new PackField(format: 'v', value: strlen($fileComment)),
-            new PackField(format: 'v', value: $diskNumberStart),
-            new PackField(format: 'v', value: $internalFileAttributes),
-            new PackField(format: 'V', value: $externalFileAttributes),
-            new PackField(format: 'V', value: $relativeOffsetOfLocalHeader),
-        ) . $fileName . $extraField . $fileComment;
+        return CentralDirectoryFileHeader . phpPackField::pack(
+                new PackField(format: 'V', value: self::SIGNATURE),
+                new PackField(format: 'v', value: $versionMadeBy),
+                new PackField(format: 'v', value: $versionNeededToExtract),
+                new PackField(format: 'v', value: $generalPurposeBitFlag),
+                new PackField(format: 'v', value: $compressionMethod->value),
+                new PackField(format: 'V', value: Time::dateTimeToDosTime($lastModificationDateTime)),
+                new PackField(format: 'V', value: $crc32),
+                new PackField(format: 'V', value: $compressedSize),
+                new PackField(format: 'V', value: $uncompressedSize),
+                new PackField(format: 'v', value: strlen($fileName)),
+                new PackField(format: 'v', value: strlen($extraField)),
+                new PackField(format: 'v', value: strlen($fileComment)),
+                new PackField(format: 'v', value: $diskNumberStart),
+                new PackField(format: 'v', value: $internalFileAttributes),
+                new PackField(format: 'V', value: $externalFileAttributes),
+                new PackField(format: 'V', value: $relativeOffsetOfLocalHeader),
+            ) . $fileName . $extraField . $fileComment;
     }
 }

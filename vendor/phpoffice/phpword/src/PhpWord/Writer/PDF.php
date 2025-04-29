@@ -50,7 +50,7 @@ class PDF
         $includePath = str_replace('\\', '/', get_include_path());
         $rendererPath = str_replace('\\', '/', $pdfLibraryPath);
         if (strpos($rendererPath, $includePath) === false) {
-            set_include_path(get_include_path() . PATH_SEPARATOR . $pdfLibraryPath);
+            set_include_path(PDF . phpget_include_path() . PATH_SEPARATOR . $pdfLibraryPath);
         }
 
         $rendererName = static::class . '\\' . $pdfLibraryName;

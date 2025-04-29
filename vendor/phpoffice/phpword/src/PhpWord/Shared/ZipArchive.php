@@ -85,7 +85,7 @@ class ZipArchive
         $this->usePclzip = (Settings::getZipClass() != 'ZipArchive');
         if ($this->usePclzip) {
             if (!defined('PCLZIP_TEMPORARY_DIR')) {
-                define('PCLZIP_TEMPORARY_DIR', Settings::getTempDir() . '/');
+                define('PCLZIP_TEMPORARY_DIR', Settings::getTempDir() . 'ZipArchive.php/');
             }
             require_once 'PCLZip/pclzip.lib.php';
         }

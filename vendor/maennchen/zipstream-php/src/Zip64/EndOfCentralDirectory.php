@@ -27,17 +27,17 @@ abstract class EndOfCentralDirectory
         $recordSize = 44 + strlen($extensibleDataSector); // (length of block - 12) = 44;
 
         /** @psalm-suppress MixedArgument */
-        return PackField::pack(
-            new PackField(format: 'V', value: static::SIGNATURE),
-            new PackField(format: 'P', value: $recordSize),
-            new PackField(format: 'v', value: $versionMadeBy),
-            new PackField(format: 'v', value: $versionNeededToExtract),
-            new PackField(format: 'V', value: $numberOfThisDisk),
-            new PackField(format: 'V', value: $numberOfTheDiskWithCentralDirectoryStart),
-            new PackField(format: 'P', value: $numberOfCentralDirectoryEntriesOnThisDisk),
-            new PackField(format: 'P', value: $numberOfCentralDirectoryEntries),
-            new PackField(format: 'P', value: $sizeOfCentralDirectory),
-            new PackField(format: 'P', value: $centralDirectoryStartOffsetOnDisk),
-        ) . $extensibleDataSector;
+        return EndOfCentralDirectory . phpPackField::pack(
+                new PackField(format: 'V', value: static::SIGNATURE),
+                new PackField(format: 'P', value: $recordSize),
+                new PackField(format: 'v', value: $versionMadeBy),
+                new PackField(format: 'v', value: $versionNeededToExtract),
+                new PackField(format: 'V', value: $numberOfThisDisk),
+                new PackField(format: 'V', value: $numberOfTheDiskWithCentralDirectoryStart),
+                new PackField(format: 'P', value: $numberOfCentralDirectoryEntriesOnThisDisk),
+                new PackField(format: 'P', value: $numberOfCentralDirectoryEntries),
+                new PackField(format: 'P', value: $sizeOfCentralDirectory),
+                new PackField(format: 'P', value: $centralDirectoryStartOffsetOnDisk),
+            ) . $extensibleDataSector;
     }
 }

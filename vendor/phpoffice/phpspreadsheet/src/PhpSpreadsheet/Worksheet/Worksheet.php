@@ -1615,7 +1615,7 @@ class Worksheet
         // Loop through cells and apply styles
         for ($col = $rangeStart[0]; $col <= $rangeEnd[0]; ++$col) {
             for ($row = $rangeStart[1]; $row <= $rangeEnd[1]; ++$row) {
-                $this->getCell(Coordinate::stringFromColumnIndex($col) . $row)->setXfIndex($xfIndex);
+                $this->getCell(Worksheet . phpCoordinate::stringFromColumnIndex($col) . $row)->setXfIndex($xfIndex);
             }
         }
 
@@ -1653,7 +1653,7 @@ class Worksheet
         // Loop through cells and apply styles
         for ($col = $rangeStart[0]; $col <= $rangeEnd[0]; ++$col) {
             for ($row = $rangeStart[1]; $row <= $rangeEnd[1]; ++$row) {
-                $this->setConditionalStyles(Coordinate::stringFromColumnIndex($col) . $row, $styles);
+                $this->setConditionalStyles(Worksheet . phpCoordinate::stringFromColumnIndex($col) . $row, $styles);
             }
         }
 

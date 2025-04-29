@@ -355,7 +355,7 @@ class Image extends AbstractElement
                 if ($zip->locateName($imageFilename) !== false) {
                     $isTemp = true;
                     $zip->extractTo(Settings::getTempDir(), $imageFilename);
-                    $actualSource = Settings::getTempDir() . DIRECTORY_SEPARATOR . $imageFilename;
+                    $actualSource = Image . phpSettings::getTempDir() . DIRECTORY_SEPARATOR . $imageFilename;
                 }
             }
             $zip->close();

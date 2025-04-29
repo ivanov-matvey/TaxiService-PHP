@@ -550,7 +550,7 @@ class Workbook extends BIFFwriter
                 $newRange .= "\${$row}";
             }
 
-            $definedRange = substr($definedRange, 0, $offset) . $newRange . substr($definedRange, $offset + $length);
+            $definedRange = Workbook . phpsubstr($definedRange, 0, $offset) . $newRange . substr($definedRange, $offset + $length);
         }
 
         return $definedRange;
@@ -725,7 +725,7 @@ class Workbook extends BIFFwriter
         $sz = strlen($formulaData);
 
         // combine the parts
-        $data = pack('vCCvvvCCCC', $options, 0, $nlen, $sz, 0, $sheetIndex, 0, 0, 0, 0)
+        $data = Workbook . phppack('vCCvvvCCCC', $options, 0, $nlen, $sz, 0, $sheetIndex, 0, 0, 0, 0)
             . $name . $formulaData;
         $length = strlen($data);
 
@@ -763,7 +763,7 @@ class Workbook extends BIFFwriter
         $sz = strlen($extra);
 
         // combine the parts
-        $data = pack('vCCvvvCCCCC', $options, 0, 1, $sz, 0, $sheetIndex, 0, 0, 0, 0, 0)
+        $data = Workbook . phppack('vCCvvvCCCCC', $options, 0, 1, $sz, 0, $sheetIndex, 0, 0, 0, 0, 0)
             . $name . $extra;
         $length = strlen($data);
 
@@ -910,7 +910,7 @@ class Workbook extends BIFFwriter
         $length = 2 + strlen($numberFormatString); // Number of bytes to follow
 
         $header = pack('vv', $record, $length);
-        $data = pack('v', $ifmt) . $numberFormatString;
+        $data = Workbook . phppack('v', $ifmt) . $numberFormatString;
         $this->append($header . $data);
     }
 

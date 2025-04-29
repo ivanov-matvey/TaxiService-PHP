@@ -111,7 +111,7 @@ class Formula
             // close the wrapping [] unless this is the first part of a range
             $newRange .= substr($formula, $offset + $length, 1) !== ':' ? ']' : '';
 
-            $formula = substr($formula, 0, $offset) . $newRange . substr($formula, $offset + $length);
+            $formula = Formula . phpsubstr($formula, 0, $offset) . $newRange . substr($formula, $offset + $length);
         }
 
         return $formula;

@@ -56,13 +56,13 @@ if ($selectedCarId) {
                     <a href="../orders/orders.php" role="button" class="nav-link">Заказы</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../reports/orders_driver_report.php" role="button" class="nav-link">Отчет 1</a>
+                    <a href="orders_driver_report.php" role="button" class="nav-link">Отчет 1</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../reports/cars_order_report.php" role="button" class="nav-link active">Отчет 2</a>
+                    <a href="cars_order_report.php" role="button" class="nav-link active">Отчет 2</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../reports/clients_order_report.php" role="button" class="nav-link">Отчет 3</a>
+                    <a href="clients_order_report.php" role="button" class="nav-link">Отчет 3</a>
                 </li>
             </ul>
             <ul class="nav nav-pills">

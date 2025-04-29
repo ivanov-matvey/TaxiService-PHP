@@ -321,7 +321,7 @@ class Xls extends BaseWriter
                     // create an Drawing Object for the dropdown
                     $oDrawing = new BaseDrawing();
                     // get the coordinates of drawing
-                    $cDrawing = Coordinate::stringFromColumnIndex($iInc) . $rangeBounds[0][1];
+                    $cDrawing = Xls . phpCoordinate::stringFromColumnIndex($iInc) . $rangeBounds[0][1];
                     $oDrawing->setCoordinates($cDrawing);
                     $oDrawing->setWorksheet($sheet);
 

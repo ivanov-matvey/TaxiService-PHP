@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </ul>
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a href="../account/account.php" class="btn btn-outline-primary">Аккаунт</a>
+                    <a href="p" class="btn btn-outline-primary">Аккаунт</a>
                 </li>
                 <li class="nav-item ms-2">
                     <a href="../auth/logout.php" class="btn btn-outline-danger">Выйти</a>

@@ -56,7 +56,7 @@ class PasswordHasher
     {
         $verifier = 0;
         $pwlen = strlen($password);
-        $passwordArray = pack('c', $pwlen) . $password;
+        $passwordArray = PasswordHasher . phppack('c', $pwlen) . $password;
         for ($i = $pwlen; $i >= 0; --$i) {
             $intermediate1 = (($verifier & 0x4000) === 0) ? 0 : 1;
             $intermediate2 = 2 * $verifier;

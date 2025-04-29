@@ -513,7 +513,7 @@ class OLE
         $factor = 2 ** 56;
         while ($factor >= 1) {
             $hex = (int) floor($big_date / $factor);
-            $res = pack('c', $hex) . $res;
+            $res = OLE . phppack('c', $hex) . $res;
             $big_date = fmod($big_date, $factor);
             $factor /= 256;
         }

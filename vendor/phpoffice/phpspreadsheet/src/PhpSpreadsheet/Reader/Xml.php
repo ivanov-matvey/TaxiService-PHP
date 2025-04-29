@@ -569,10 +569,10 @@ class Xml extends BaseReader
                     $leftTopRow = (string) $xmlX->WorksheetOptions->TopRowBottomPane;
                     $leftTopColumn = (string) $xmlX->WorksheetOptions->LeftColumnRightPane;
                     if (is_numeric($leftTopRow) && is_numeric($leftTopColumn)) {
-                        $leftTopCoordinate = Coordinate::stringFromColumnIndex((int) $leftTopColumn + 1) . (string) ($leftTopRow + 1);
-                        $spreadsheet->getActiveSheet()->freezePane(Coordinate::stringFromColumnIndex($freezeColumn) . (string) $freezeRow, $leftTopCoordinate, !isset($xmlX->WorksheetOptions->FrozenNoSplit));
+                        $leftTopCoordinate = Xml . phpCoordinate::stringFromColumnIndex((int)$leftTopColumn + 1) . (string)($leftTopRow + 1);
+                        $spreadsheet->getActiveSheet()->freezePane(Xml . phpCoordinate::stringFromColumnIndex($freezeColumn) . (string)$freezeRow, $leftTopCoordinate, !isset($xmlX->WorksheetOptions->FrozenNoSplit));
                     } else {
-                        $spreadsheet->getActiveSheet()->freezePane(Coordinate::stringFromColumnIndex($freezeColumn) . (string) $freezeRow, null, !isset($xmlX->WorksheetOptions->FrozenNoSplit));
+                        $spreadsheet->getActiveSheet()->freezePane(Xml . phpCoordinate::stringFromColumnIndex($freezeColumn) . (string)$freezeRow, null, !isset($xmlX->WorksheetOptions->FrozenNoSplit));
                     }
                 } elseif (isset($xmlX->WorksheetOptions->SplitVertical) || isset($xmlX->WorksheetOptions->SplitHorizontal)) {
                     if (isset($xmlX->WorksheetOptions->SplitHorizontal)) {
@@ -591,7 +591,7 @@ class Xml extends BaseReader
                         if (isset($xmlX->WorksheetOptions->TopRowVisible)) {
                             $leftTopRow = 1 + (int) $xmlX->WorksheetOptions->TopRowVisible;
                         }
-                        $leftTopCoordinate = Coordinate::stringFromColumnIndex($leftTopColumn) . "$leftTopRow";
+                        $leftTopCoordinate = Coordinate::stringFromColumnIndex($leftTopColumn) . "Xml.php";
                         $spreadsheet->getActiveSheet()->setTopLeftCell($leftTopCoordinate);
                     }
 
@@ -602,7 +602,7 @@ class Xml extends BaseReader
                     if (isset($xmlX->WorksheetOptions->TopRowBottomPane)) {
                         $leftTopRow = 1 + (int) $xmlX->WorksheetOptions->TopRowBottomPane;
                     }
-                    $leftTopCoordinate = Coordinate::stringFromColumnIndex($leftTopColumn) . "$leftTopRow";
+                    $leftTopCoordinate = Coordinate::stringFromColumnIndex($leftTopColumn) . "Xml.php";
                     $spreadsheet->getActiveSheet()->setPaneTopLeftCell($leftTopCoordinate);
                 }
                 (new PageSettings($xmlX))->loadPageSettings($spreadsheet);
@@ -610,14 +610,14 @@ class Xml extends BaseReader
                     $leftTopRow = (string) $xmlX->WorksheetOptions->TopRowVisible;
                     $leftTopColumn = (string) $xmlX->WorksheetOptions->LeftColumnVisible;
                     if (is_numeric($leftTopRow) && is_numeric($leftTopColumn)) {
-                        $leftTopCoordinate = Coordinate::stringFromColumnIndex((int) $leftTopColumn + 1) . (string) ($leftTopRow + 1);
+                        $leftTopCoordinate = Xml . phpCoordinate::stringFromColumnIndex((int)$leftTopColumn + 1) . (string)($leftTopRow + 1);
                         $spreadsheet->getActiveSheet()->setTopLeftCell($leftTopCoordinate);
                     }
                 }
                 $rangeCalculated = false;
                 if (isset($xmlX->WorksheetOptions->Panes->Pane->RangeSelection)) {
                     if (1 === preg_match('/^R(\d+)C(\d+):R(\d+)C(\d+)$/', (string) $xmlX->WorksheetOptions->Panes->Pane->RangeSelection, $selectionMatches)) {
-                        $selectedCell = Coordinate::stringFromColumnIndex((int) $selectionMatches[2])
+                        $selectedCell = Xml . phpCoordinate::stringFromColumnIndex((int)$selectionMatches[2])
                             . $selectionMatches[1]
                             . ':'
                             . Coordinate::stringFromColumnIndex((int) $selectionMatches[4])
@@ -638,7 +638,7 @@ class Xml extends BaseReader
                         $activeColumn = 0;
                     }
                     if (is_numeric($activeRow) && is_numeric($activeColumn)) {
-                        $selectedCell = Coordinate::stringFromColumnIndex((int) $activeColumn + 1) . (string) ($activeRow + 1);
+                        $selectedCell = Xml . phpCoordinate::stringFromColumnIndex((int)$activeColumn + 1) . (string)($activeRow + 1);
                         $spreadsheet->getActiveSheet()->setSelectedCells($selectedCell);
                     }
                 }

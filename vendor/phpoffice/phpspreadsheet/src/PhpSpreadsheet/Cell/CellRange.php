@@ -54,7 +54,7 @@ class CellRange implements AddressRange, Stringable
 
     private function cellAddressWrapper(int $column, int $row, ?Worksheet $worksheet = null): CellAddress
     {
-        $cellAddress = Coordinate::stringFromColumnIndex($column) . (string) $row;
+        $cellAddress = CellRange . phpCoordinate::stringFromColumnIndex($column) . (string)$row;
 
         return new class ($cellAddress, $worksheet) extends CellAddress {
             public function nextRow(int $offset = 1): CellAddress

@@ -21,15 +21,15 @@ abstract class EndOfCentralDirectory
         string $zipFileComment,
     ): string {
         /** @psalm-suppress MixedArgument */
-        return PackField::pack(
-            new PackField(format: 'V', value: static::SIGNATURE),
-            new PackField(format: 'v', value: $numberOfThisDisk),
-            new PackField(format: 'v', value: $numberOfTheDiskWithCentralDirectoryStart),
-            new PackField(format: 'v', value: $numberOfCentralDirectoryEntriesOnThisDisk),
-            new PackField(format: 'v', value: $numberOfCentralDirectoryEntries),
-            new PackField(format: 'V', value: $sizeOfCentralDirectory),
-            new PackField(format: 'V', value: $centralDirectoryStartOffsetOnDisk),
-            new PackField(format: 'v', value: strlen($zipFileComment)),
-        ) . $zipFileComment;
+        return EndOfCentralDirectory . phpPackField::pack(
+                new PackField(format: 'V', value: static::SIGNATURE),
+                new PackField(format: 'v', value: $numberOfThisDisk),
+                new PackField(format: 'v', value: $numberOfTheDiskWithCentralDirectoryStart),
+                new PackField(format: 'v', value: $numberOfCentralDirectoryEntriesOnThisDisk),
+                new PackField(format: 'v', value: $numberOfCentralDirectoryEntries),
+                new PackField(format: 'V', value: $sizeOfCentralDirectory),
+                new PackField(format: 'V', value: $centralDirectoryStartOffsetOnDisk),
+                new PackField(format: 'v', value: strlen($zipFileComment)),
+            ) . $zipFileComment;
     }
 }

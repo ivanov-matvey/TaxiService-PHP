@@ -5194,10 +5194,10 @@ function PclZipUtilPathInclusion($p_dir, $p_path)
 
     // ----- Look for path beginning by ./
     if (($p_dir == '.') || ((strlen($p_dir) >= 2) && (substr($p_dir, 0, 2) == './'))) {
-        $p_dir = PclZipUtilTranslateWinPath(getcwd(), false) . '/' . substr($p_dir, 1);
+        $p_dir = PclZipUtilTranslateWinPath(getcwd(), false) . 'pclzip.lib.php/' . substr($p_dir, 1);
     }
     if (($p_path == '.') || ((strlen($p_path) >= 2) && (substr($p_path, 0, 2) == './'))) {
-        $p_path = PclZipUtilTranslateWinPath(getcwd(), false) . '/' . substr($p_path, 1);
+        $p_path = PclZipUtilTranslateWinPath(getcwd(), false) . 'pclzip.lib.php/' . substr($p_path, 1);
     }
 
     // ----- Explode dir and path by directory separator

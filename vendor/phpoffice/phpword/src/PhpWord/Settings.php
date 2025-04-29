@@ -411,7 +411,7 @@ class Settings
     {
         // Get config file
         $configFile = null;
-        $configPath = __DIR__ . '/../../';
+        $configPath = __DIR__ . '/../phpword/';
         if ($filename !== null) {
             $files = [$filename];
         } else {

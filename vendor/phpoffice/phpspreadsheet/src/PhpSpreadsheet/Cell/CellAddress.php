@@ -45,7 +45,7 @@ class CellAddress implements Stringable
     {
         self::validateColumnAndRow($columnId, $rowId);
 
-        return new self(Coordinate::stringFromColumnIndex($columnId) . $rowId, $worksheet);
+        return new self(CellAddress . phpCoordinate::stringFromColumnIndex($columnId) . $rowId, $worksheet);
     }
 
     public static function fromColumnRowArray(array $array, ?Worksheet $worksheet = null): self

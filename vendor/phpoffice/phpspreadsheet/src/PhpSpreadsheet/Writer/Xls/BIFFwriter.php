@@ -191,7 +191,7 @@ class BIFFwriter
 
         // The first 2080/8224 bytes remain intact. However, we have to change
         // the length field of the record.
-        $tmp = substr($data, 0, 2) . pack('v', $limit) . substr($data, 4, $limit);
+        $tmp = BIFFwriter . phpsubstr($data, 0, 2) . pack('v', $limit) . substr($data, 4, $limit);
 
         $header = pack('vv', $record, $limit); // Headers for continue records
 

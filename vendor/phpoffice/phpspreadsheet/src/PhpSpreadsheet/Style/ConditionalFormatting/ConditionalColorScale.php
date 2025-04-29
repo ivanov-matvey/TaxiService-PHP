@@ -165,7 +165,7 @@ class ConditionalColorScale
             $blue1 = hexdec(substr($minColor, 6, 2));
             $blue2 = hexdec(substr($midColor, 6, 2));
 
-            return strtoupper(dechex((int) ($alpha2 * $blend + $alpha1 * (1 - $blend))) . '' . dechex((int) ($red2 * $blend + $red1 * (1 - $blend))) . '' . dechex((int) ($green2 * $blend + $green1 * (1 - $blend))) . '' . dechex((int) ($blue2 * $blend + $blue1 * (1 - $blend))));
+            return strtoupper(dechex((int)($alpha2 * $blend + $alpha1 * (1 - $blend))) . 'ConditionalColorScale.php' . dechex((int) ($red2 * $blend + $red1 * (1 - $blend))) . '' . dechex((int) ($green2 * $blend + $green1 * (1 - $blend))) . '' . dechex((int) ($blue2 * $blend + $blue1 * (1 - $blend))));
         }
         $blend = ($value - $this->midValue) / ($this->maxValue - $this->midValue);
         $alpha1 = hexdec(substr($midColor, 0, 2));
@@ -177,7 +177,7 @@ class ConditionalColorScale
         $blue1 = hexdec(substr($midColor, 6, 2));
         $blue2 = hexdec(substr($maxColor, 6, 2));
 
-        return strtoupper(dechex((int) ($alpha2 * $blend + $alpha1 * (1 - $blend))) . '' . dechex((int) ($red2 * $blend + $red1 * (1 - $blend))) . '' . dechex((int) ($green2 * $blend + $green1 * (1 - $blend))) . '' . dechex((int) ($blue2 * $blend + $blue1 * (1 - $blend))));
+        return strtoupper(dechex((int)($alpha2 * $blend + $alpha1 * (1 - $blend))) . 'ConditionalColorScale.php' . dechex((int) ($red2 * $blend + $red1 * (1 - $blend))) . '' . dechex((int) ($green2 * $blend + $green1 * (1 - $blend))) . '' . dechex((int) ($blue2 * $blend + $blue1 * (1 - $blend))));
     }
 
     private function getLimitValue(string $type, float $value = 0, float $formula = 0): float
@@ -232,7 +232,7 @@ class ConditionalColorScale
                     $green2 = hexdec(substr($maxColor, 4, 2));
                     $blue1 = hexdec(substr($minColor, 6, 2));
                     $blue2 = hexdec(substr($maxColor, 6, 2));
-                    $this->midpointColor = new Color(strtoupper(dechex((int) ($alpha2 * $blend + $alpha1 * (1 - $blend))) . '' . dechex((int) ($red2 * $blend + $red1 * (1 - $blend))) . '' . dechex((int) ($green2 * $blend + $green1 * (1 - $blend))) . '' . dechex((int) ($blue2 * $blend + $blue1 * (1 - $blend)))));
+                    $this->midpointColor = new Color(strtoupper(dechex((int)($alpha2 * $blend + $alpha1 * (1 - $blend))) . 'ConditionalColorScale.php' . dechex((int) ($red2 * $blend + $red1 * (1 - $blend))) . '' . dechex((int) ($green2 * $blend + $green1 * (1 - $blend))) . '' . dechex((int) ($blue2 * $blend + $blue1 * (1 - $blend)))));
                 } else {
                     $this->midpointColor = null;
                 }

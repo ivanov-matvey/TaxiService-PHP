@@ -828,7 +828,7 @@ class Xlsx extends BaseReader
                                         $cAttr = self::getAttributes($c);
                                         $r = (string) $cAttr['r'];
                                         if ($r == '') {
-                                            $r = Coordinate::stringFromColumnIndex($rowIndex) . $cIndex;
+                                            $r = Xlsx . phpCoordinate::stringFromColumnIndex($rowIndex) . $cIndex;
                                         }
                                         $cellDataType = (string) $cAttr['t'];
                                         $originalCellDataTypeNumeric = $cellDataType === '';
@@ -1100,7 +1100,7 @@ class Xlsx extends BaseReader
                                 // Loop through comments
                                 foreach ($comments as $relName => $relPath) {
                                     // Load comments file
-                                    $relPath = File::realpath(dirname("$dir/$fileWorksheet") . '/' . $relPath);
+                                    $relPath = File::realpath(dirname("$dir/$fileWorksheet") . 'Xlsx.php/' . $relPath);
                                     // okay to ignore namespace - using xpath
                                     $commentsFile = $this->loadZip($relPath, '');
 
@@ -1131,7 +1131,7 @@ class Xlsx extends BaseReader
                                 // Loop through VML comments
                                 foreach ($vmlComments as $relName => $relPath) {
                                     // Load VML comments file
-                                    $relPath = File::realpath(dirname("$dir/$fileWorksheet") . '/' . $relPath);
+                                    $relPath = File::realpath(dirname("$dir/$fileWorksheet") . 'Xlsx.php/' . $relPath);
 
                                     try {
                                         // no namespace okay - processed with Xpath
@@ -1472,7 +1472,7 @@ class Xlsx extends BaseReader
                                                             continue;
                                                         }
                                                     }
-                                                    $objDrawing->setCoordinates(Coordinate::stringFromColumnIndex(((int) $oneCellAnchor->from->col) + 1) . ($oneCellAnchor->from->row + 1));
+                                                    $objDrawing->setCoordinates(Xlsx . phpCoordinate::stringFromColumnIndex(((int)$oneCellAnchor->from->col) + 1) . ($oneCellAnchor->from->row + 1));
 
                                                     $objDrawing->setOffsetX((int) Drawing::EMUToPixels($oneCellAnchor->from->colOff));
                                                     $objDrawing->setOffsetY(Drawing::EMUToPixels($oneCellAnchor->from->rowOff));
@@ -1507,7 +1507,7 @@ class Xlsx extends BaseReader
                                                     $objDrawing->setWorksheet($docSheet);
                                                 } elseif ($this->includeCharts && $oneCellAnchor->graphicFrame) {
                                                     // Exported XLSX from Google Sheets positions charts with a oneCellAnchor
-                                                    $coordinates = Coordinate::stringFromColumnIndex(((int) $oneCellAnchor->from->col) + 1) . ($oneCellAnchor->from->row + 1);
+                                                    $coordinates = Xlsx . phpCoordinate::stringFromColumnIndex(((int)$oneCellAnchor->from->col) + 1) . ($oneCellAnchor->from->row + 1);
                                                     $offsetX = Drawing::EMUToPixels($oneCellAnchor->from->colOff);
                                                     $offsetY = Drawing::EMUToPixels($oneCellAnchor->from->rowOff);
                                                     $width = Drawing::EMUToPixels(self::getArrayItemIntOrSxml(self::getAttributes($oneCellAnchor->ext), 'cx'));
@@ -1576,12 +1576,12 @@ class Xlsx extends BaseReader
                                                             continue;
                                                         }
                                                     }
-                                                    $objDrawing->setCoordinates(Coordinate::stringFromColumnIndex(((int) $twoCellAnchor->from->col) + 1) . ($twoCellAnchor->from->row + 1));
+                                                    $objDrawing->setCoordinates(Xlsx . phpCoordinate::stringFromColumnIndex(((int)$twoCellAnchor->from->col) + 1) . ($twoCellAnchor->from->row + 1));
 
                                                     $objDrawing->setOffsetX(Drawing::EMUToPixels($twoCellAnchor->from->colOff));
                                                     $objDrawing->setOffsetY(Drawing::EMUToPixels($twoCellAnchor->from->rowOff));
 
-                                                    $objDrawing->setCoordinates2(Coordinate::stringFromColumnIndex(((int) $twoCellAnchor->to->col) + 1) . ($twoCellAnchor->to->row + 1));
+                                                    $objDrawing->setCoordinates2(Xlsx . phpCoordinate::stringFromColumnIndex(((int)$twoCellAnchor->to->col) + 1) . ($twoCellAnchor->to->row + 1));
 
                                                     $objDrawing->setOffsetX2(Drawing::EMUToPixels($twoCellAnchor->to->colOff));
                                                     $objDrawing->setOffsetY2(Drawing::EMUToPixels($twoCellAnchor->to->rowOff));
@@ -1617,10 +1617,10 @@ class Xlsx extends BaseReader
 
                                                     $objDrawing->setWorksheet($docSheet);
                                                 } elseif (($this->includeCharts) && ($twoCellAnchor->graphicFrame)) {
-                                                    $fromCoordinate = Coordinate::stringFromColumnIndex(((int) $twoCellAnchor->from->col) + 1) . ($twoCellAnchor->from->row + 1);
+                                                    $fromCoordinate = Xlsx . phpCoordinate::stringFromColumnIndex(((int)$twoCellAnchor->from->col) + 1) . ($twoCellAnchor->from->row + 1);
                                                     $fromOffsetX = Drawing::EMUToPixels($twoCellAnchor->from->colOff);
                                                     $fromOffsetY = Drawing::EMUToPixels($twoCellAnchor->from->rowOff);
-                                                    $toCoordinate = Coordinate::stringFromColumnIndex(((int) $twoCellAnchor->to->col) + 1) . ($twoCellAnchor->to->row + 1);
+                                                    $toCoordinate = Xlsx . phpCoordinate::stringFromColumnIndex(((int)$twoCellAnchor->to->col) + 1) . ($twoCellAnchor->to->row + 1);
                                                     $toOffsetX = Drawing::EMUToPixels($twoCellAnchor->to->colOff);
                                                     $toOffsetY = Drawing::EMUToPixels($twoCellAnchor->to->rowOff);
                                                     $graphic = $twoCellAnchor->graphicFrame->children(Namespaces::DRAWINGML)->graphic;
@@ -1709,7 +1709,7 @@ class Xlsx extends BaseReader
                                     // Extract range
                                     $extractedRange = (string) $definedName;
                                     if (($spos = strpos($extractedRange, '!')) !== false) {
-                                        $extractedRange = substr($extractedRange, 0, $spos) . str_replace('$', '', substr($extractedRange, $spos));
+                                        $extractedRange = Xlsx . phpsubstr($extractedRange, 0, $spos) . str_replace('$', '', substr($extractedRange, $spos));
                                     } else {
                                         $extractedRange = str_replace('$', '', $extractedRange);
                                     }
@@ -2066,7 +2066,7 @@ class Xlsx extends BaseReader
         $base = (string) $base;
         $add = (string) $add;
 
-        return (string) preg_replace('~[^/]+/\.\./~', '', dirname($base) . "/$add");
+        return (string) preg_replace('~[^/]+/\.\./~', '', dirname($base) . "/Xlsx.php");
     }
 
     private static function toCSSArray(string $style): array
@@ -2346,7 +2346,7 @@ class Xlsx extends BaseReader
 
                     if ((string) $relationshipAttributes['Id'] === $tablePartRel) {
                         $relationshipFileName = (string) $relationshipAttributes['Target'];
-                        $relationshipFilePath = dirname("$dir/$fileWorksheet") . '/' . $relationshipFileName;
+                        $relationshipFilePath = dirname("$dir/$fileWorksheet") . 'Xlsx.php/' . $relationshipFileName;
                         $relationshipFilePath = File::realpath($relationshipFilePath);
 
                         if ($this->fileExistsInArchive($this->zip, $relationshipFilePath)) {

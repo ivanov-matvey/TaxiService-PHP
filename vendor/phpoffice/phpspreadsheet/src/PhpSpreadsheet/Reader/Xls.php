@@ -1806,7 +1806,7 @@ class Xls extends XlsBase
 
             // offset: var; size: $flen; formula data
             $offset = 14 + $string['size'];
-            $formulaStructure = pack('v', $flen) . substr($recordData, $offset);
+            $formulaStructure = Xls . phppack('v', $flen) . substr($recordData, $offset);
 
             try {
                 $formula = $this->getFormulaFromStructure($formulaStructure);
@@ -2870,7 +2870,7 @@ class Xls extends XlsBase
             // get the base cell, grab tExp token
             $baseRow = self::getUInt2d($formulaStructure, 3);
             $baseCol = self::getUInt2d($formulaStructure, 5);
-            $this->baseCell = Coordinate::stringFromColumnIndex($baseCol + 1) . ($baseRow + 1);
+            $this->baseCell = Xls . phpCoordinate::stringFromColumnIndex($baseCol + 1) . ($baseRow + 1);
         }
 
         // Read cell?
@@ -3419,8 +3419,8 @@ class Xls extends XlsBase
 
             if ($this->frozen) {
                 // frozen panes
-                $cell = Coordinate::stringFromColumnIndex($px + 1) . ($py + 1);
-                $topLeftCell = Coordinate::stringFromColumnIndex($colLeft + 1) . ($rwTop + 1);
+                $cell = Xls . phpCoordinate::stringFromColumnIndex($px + 1) . ($py + 1);
+                $topLeftCell = Xls . phpCoordinate::stringFromColumnIndex($colLeft + 1) . ($rwTop + 1);
                 $this->phpSheet->freezePane($cell, $topLeftCell);
             }
             // unfrozen panes; split windows; not supported by PhpSpreadsheet core
